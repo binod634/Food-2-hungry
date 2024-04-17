@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:food_2_hunger/Login/containercircle.dart';
-import 'package:food_2_hunger/algorithm/navigate.dart';
-import 'package:food_2_hunger/algorithm/screensize.dart';
-import 'package:food_2_hunger/elements/label.dart';
-import 'package:food_2_hunger/themeData/theme.dart';
+import 'package:walkthrough_test/design/containercircle.dart';
+import 'package:walkthrough_test/algorithm/screensize.dart';
+import 'package:walkthrough_test/elements/label.dart';
+import 'package:walkthrough_test/home/home.dart';
+import 'package:walkthrough_test/themeData/theme.dart';
 
 class AppSignUp extends StatelessWidget {
   const AppSignUp({super.key});
@@ -28,7 +28,8 @@ class AppSignUpState extends StatefulWidget {
 class _AppSignUpSate extends State<AppSignUpState> {
   void doSomething() {}
   void checkSignIn() {
-    navigatorNavigateTo(context, navigationChild: const AppSignUp());
+    Navigator.of(context)
+        .push(MaterialPageRoute(builder: (context) => const AppHomeUi()));
   }
 
   var mailController = TextEditingController();

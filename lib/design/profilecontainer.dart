@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:food_2_hunger/algorithm/screensize.dart';
 import 'package:walkthrough_test/algorithm/screensize.dart';
 
 class ProfileContainer extends StatelessWidget {

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:food_2_hunger/algorithm/screensize.dart';
-import 'package:food_2_hunger/design/profilecontainer.dart';
-import 'package:food_2_hunger/elements/bottomnavigation.dart';
-import 'package:food_2_hunger/elements/label.dart';
-import 'package:food_2_hunger/themeData/theme.dart';
+import 'package:walkthrough_test/algorithm/screensize.dart';
+import 'package:walkthrough_test/design/profilecontainer.dart';
+import 'package:walkthrough_test/elements/bottomnavigation.dart';
+import 'package:walkthrough_test/elements/label.dart';
+import 'package:walkthrough_test/themeData/theme.dart';
 
 class EditProfile extends StatelessWidget {
   const EditProfile({super.key});

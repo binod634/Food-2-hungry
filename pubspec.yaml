@@ -29,6 +29,12 @@ flutter:
   - assets/profile.png
   - assets/mailicon.png
   - assets/keyiconorg.png
+  - assets/clothesorg.png
+  - assets/firstaidorg.png
+  - assets/educationorg.png
+  - assets/foodorg.png
+
+
   fonts:
     - family: joti
       fonts:

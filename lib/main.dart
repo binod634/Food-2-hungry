@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:food_2_hunger/Login/login.dart';
+import 'package:walkthrough_test/uitest/adddonation.dart';
 
 void main() {
+  // runApp(const WalkthroughStateless());
   WidgetsFlutterBinding.ensureInitialized();
-  runApp(const AppLogin());
+  runApp(const FoodDonation());
 }

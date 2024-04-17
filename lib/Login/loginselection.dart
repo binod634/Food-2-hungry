@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:food_2_hunger/algorithm/screensize.dart';
-import 'package:food_2_hunger/design/containercircle.dart';
-import 'package:food_2_hunger/elements/label.dart';
-import 'package:food_2_hunger/themeData/theme.dart';
+import 'package:walkthrough_test/design/containercircle.dart';
+import 'package:walkthrough_test/algorithm/screensize.dart';
+import 'package:walkthrough_test/elements/label.dart';
+import 'package:walkthrough_test/themeData/theme.dart';
 
 class LoginSelection extends StatelessWidget {
   const LoginSelection({super.key});
@@ -33,7 +33,7 @@ class _LoginSelectionScreenState extends State<LoginSelectionScreen> {
       body: Stack(
         children: [
           const ContainerCircle(
-            height: 0.45,
+            height: 0.35,
           ),
           Column(
             // mainAxisAlignment: MainAxisAlignment.center,
@@ -49,7 +49,7 @@ class _LoginSelectionScreenState extends State<LoginSelectionScreen> {
                   height: screenheight(context) * 0.1,
                   child: titleLabel(context)),
               SizedBox(
-                  height: screenheight(context) * 0.3,
+                  height: screenheight(context) * 0.35,
                   child: Padding(
                     padding: const EdgeInsets.only(top: 0),
                     child: Image.asset(
@@ -57,7 +57,7 @@ class _LoginSelectionScreenState extends State<LoginSelectionScreen> {
                       fit: BoxFit.contain,
                     ),
                   )),
-              SizedBox(height: screenheight(context) * 0.05),
+              SizedBox(height: screenheight(context) * 0.1),
               SizedBox(
                   height: screenheight(context) * 0.1,
                   child: Padding(
@@ -72,13 +72,13 @@ class _LoginSelectionScreenState extends State<LoginSelectionScreen> {
                             fontFamily: 'joti'),
                       ))),
               SizedBox(
-                height: screenheight(context) * 0.15,
+                height: screenheight(context) * 0.05,
                 width: screenwidth(context) * 0.8,
                 child: Center(
                   child: SizedBox(
-                      width: MediaQuery.of(context).size.width * 0.4,
+                      width: MediaQuery.of(context).size.width * 0.5,
                       child: FilledButton(
-                          onPressed: doSomething, child: const Text("Hi"))),
+                          onPressed: doSomething, child: const Text("Login"))),
                 ),
               ),
               SizedBox(
@@ -86,10 +86,13 @@ class _LoginSelectionScreenState extends State<LoginSelectionScreen> {
                   width: screenwidth(context) * 0.8,
                   child: Center(
                     child: SizedBox(
-                        width: MediaQuery.of(context).size.width * 0.4,
+                        width: MediaQuery.of(context).size.width * 0.5,
                         child: FilledButton(
+                          style: const ButtonStyle(
+                              backgroundColor:
+                                  MaterialStatePropertyAll(Colors.red)),
                           onPressed: doSomething,
-                          child: const Text("data"),
+                          child: const Text("Sign Up"),
                         )),
                   )),
               // SizedBox(
@@ -116,6 +119,9 @@ class _LoginSelectionScreenState extends State<LoginSelectionScreen> {
                         style: TextStyle(
                             fontWeight: FontWeight.bold, fontSize: 12),
                       ))),
+              SizedBox(
+                height: screenheight(context) * 0.05,
+              )
             ],
           ),
         ],
