@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:food_2_hunger/design/containercircle.dart';
 import 'package:food_2_hunger/algorithm/screensize.dart';
 import 'package:food_2_hunger/elements/label.dart';
-import 'package:food_2_hunger/signup/signup.dart';
+import 'package:food_2_hunger/home/home.dart';
 import 'package:food_2_hunger/themeData/theme.dart';
 
 class AppLogin extends StatelessWidget {
@@ -26,10 +26,19 @@ class AppLoginState extends StatefulWidget {
 }
 
 class _AppLoginState extends State<AppLoginState> {
+  String initialText = "Login";
   void doSomething() {}
-  void checkLogin() {
-    Navigator.of(context)
-        .push(MaterialPageRoute(builder: (context) => const AppSignUp()));
+  void checkLogin() async {
+    await Future.delayed(const Duration(seconds: 2));
+    if (mailString == "binod" && pwdString == "binod") {
+      Navigator.of(context)
+          .push(MaterialPageRoute(builder: (context) => const AppHomeUi()));
+    } else {
+      await Future.delayed(const Duration(seconds: 2));
+      setState(() {
+        initialText = "Incorrect.";
+      });
+    }
   }
 
   var mailController = TextEditingController();
@@ -78,10 +87,10 @@ class _AppLoginState extends State<AppLoginState> {
                       child: Padding(
                           padding: EdgeInsets.only(
                               right: screenwidth(context) * 0.3),
-                          child: const Text(
+                          child: Text(
                             // textAlign: TextAlign.left,
-                            "Login",
-                            style: TextStyle(
+                            initialText,
+                            style: const TextStyle(
                                 fontWeight: FontWeight.bold,
                                 fontSize: 40,
                                 fontFamily: 'joti'),

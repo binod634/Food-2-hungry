@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:food_2_hunger/algorithm/screensize.dart';
+import 'package:food_2_hunger/database/database.dart';
+import 'package:food_2_hunger/database/http.dart';
 import 'package:food_2_hunger/design/profilecontainer.dart';
 import 'package:food_2_hunger/elements/bottomnavigation.dart';
 import 'package:food_2_hunger/elements/label.dart';
 import 'package:food_2_hunger/themeData/theme.dart';
+import 'package:mysql1/mysql1.dart';
 
 class ListingDonation extends StatelessWidget {
   const ListingDonation({super.key});
@@ -27,42 +30,64 @@ class ProfileStateful extends StatefulWidget {
 class _ProfileStatefulState extends State<ProfileStateful> {
   void doSomethings() {}
 
+  @override
+  void initState() {
+    super.initState();
+    getDonationList();
+  }
+
+  void getDonationList() async {
+    var conn = await MySqlConnection.connect(databaseSettings);
+    var result = await conn
+        .query("SELECT image,title,description,location FROM `donationdata`");
+
+    List<Map<String, dynamic>> parsedDonations = [];
+
+    for (var row in result) {
+      parsedDonations.add({
+        "image": row['image'],
+        "title": row['title'],
+        "description": row['description'],
+        "location": row['location'].toString(),
+      });
+    }
+
+    setState(() {
+      itemList = parsedDonations;
+    });
+  }
+
   // Dummy data for demonstration
   List<Map<String, dynamic>> itemList = [
     {
-      'image': 'assets/image.jpeg',
+      'image': 'image.jpeg',
       'title': 'Item 1',
       'description': 'Description for item 1',
-      'time': '10:00 AM',
-      'quantity': 2,
+      'location': '10:00 AM',
     },
     {
-      'image': 'assets/image.jpeg',
+      'image': 'image.jpeg',
       'title': 'Item 2',
       'description': 'Description for item 2',
-      'time': '11:30 AM',
-      'quantity': 1,
+      'location': '11:30 AM',
     },
     {
-      'image': 'assets/image.jpeg',
+      'image': 'image.jpeg',
       'title': 'Item 2',
       'description': 'Description for item 2',
-      'time': '11:30 AM',
-      'quantity': 1,
+      'location': '11:30 AM',
     },
     {
-      'image': 'assets/image.jpeg',
+      'image': 'image.jpeg',
       'title': 'Item 2',
       'description': 'Description for item 2',
-      'time': '11:30 AM',
-      'quantity': 1,
+      'location': '11:30 AM',
     },
     {
-      'image': 'assets/image.jpeg',
+      'image': 'image.jpeg',
       'title': 'Item 2',
       'description': 'Description for item 2',
-      'time': '11:30 AM',
-      'quantity': 1,
+      'location': '11:30 AM',
     },
     // Add more items as needed
   ];
@@ -117,12 +142,13 @@ class _ProfileStatefulState extends State<ProfileStateful> {
                                   children: [
                                     Center(
                                       child: ClipOval(
-                                        child: Image.asset(
-                                          itemList[index]["image"],
+                                        child: Image.network(
+                                          "$httpServer${itemList[index]["image"]}",
                                           width:
-                                              64, // Specify width of the circular image
-                                          height:
-                                              64, // Specify height of the circular image
+                                              100, // Specify width of the circular image
+                                          height: 100,
+                                          fit: BoxFit
+                                              .fill, // Specify height of the circular image
                                         ),
                                       ),
                                     ),
@@ -157,15 +183,7 @@ class _ProfileStatefulState extends State<ProfileStateful> {
                                               height:
                                                   4), // Add some space between description and other subtitles
                                           Text(
-                                            'Time: ${itemList[index]["time"]}',
-                                            style: const TextStyle(
-                                              fontWeight: FontWeight.normal,
-                                              fontSize: 14,
-                                              color: Colors.grey,
-                                            ),
-                                          ),
-                                          Text(
-                                            'Quantity: ${itemList[index]["quantity"]}',
+                                            'location: ${itemList[index]["location"]}',
                                             style: const TextStyle(
                                               fontWeight: FontWeight.normal,
                                               fontSize: 14,

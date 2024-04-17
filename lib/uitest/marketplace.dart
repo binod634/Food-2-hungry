@@ -23,16 +23,16 @@ class uiTestStatefulState extends StatefulWidget {
 
 class _uiTestStateful extends State<uiTestStatefulState> {
   final List<Map<String, String>> specialOffers = [
-    {'name': 'Fresh Vegetables', 'price': 'Rs. 100'},
-    {'name': 'Exotic Fruits', 'price': 'Rs. 150'},
-    {'name': 'Organic Honey', 'price': 'Rs. 250'},
-    {'name': 'Organic Honey', 'price': 'Rs. 250'},
-    {'name': 'Organic Honey', 'price': 'Rs. 250'},
-    {'name': 'Organic Honey', 'price': 'Rs. 250'},
-    {'name': 'Organic Honey', 'price': 'Rs. 250'},
-    {'name': 'Organic Honey', 'price': 'Rs. 250'},
-    {'name': 'Organic Honey', 'price': 'Rs. 250'},
-    {'name': 'Organic Honey', 'price': 'Rs. 250'},
+    {'name': 'Hand Plot', 'price': 'Rs. 100', 'image': "assets/cloth.png"},
+    {'name': 'Exotic Fruits', 'price': 'Rs. 150', 'image': "assets/plot.png"},
+    {'name': 'Organic Honey', 'price': 'Rs. 250', 'image': "assets/card.png"},
+    {'name': 'Organic Honey', 'price': 'Rs. 250', 'image': "assets/purse.png"},
+    {'name': 'Organic Honey', 'price': 'Rs. 250', 'image': "assets/plot1.png"},
+    {'name': 'Organic Honey', 'price': 'Rs. 250', 'image': "assets/plot.png"},
+    {'name': 'Organic Honey', 'price': 'Rs. 250', 'image': "assets/cloth.png"},
+    {'name': 'Organic Honey', 'price': 'Rs. 250', 'image': "assets/plot.png"},
+    {'name': 'Organic Honey', 'price': 'Rs. 250', 'image': "assets/purse.png"},
+    {'name': 'Organic Honey', 'price': 'Rs. 250', 'image': "assets/card.png"},
   ];
 
   @override
@@ -84,10 +84,20 @@ Widget _buildSpecialOfferItem(Map<String, String> item) {
           child: Center(
             child: Column(
               children: <Widget>[
+                const SizedBox(
+                  height: 5,
+                ),
                 SizedBox(
                   height: 60,
-                  child: Image.asset(
-                    'assets/clothesorg.png',
+                  width: 60,
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(
+                        10), // Adjust the radius as needed
+                    child: Image.asset(
+                      item['image']!,
+                      fit: BoxFit
+                          .cover, // Use cover to fill the curved container
+                    ),
                   ),
                 ),
                 Text(
@@ -100,7 +110,7 @@ Widget _buildSpecialOfferItem(Map<String, String> item) {
                 Text(
                   item['price']!,
                   style: const TextStyle(
-                    fontSize: 8.0,
+                    fontSize: 10.0,
                   ),
                 ),
               ],
