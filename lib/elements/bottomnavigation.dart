@@ -4,6 +4,7 @@ import 'package:food_2_hunger/home/home.dart';
 import 'package:food_2_hunger/uitest/adddonation.dart';
 import 'package:food_2_hunger/home/profile.dart';
 import 'package:food_2_hunger/uitest/listing.dart';
+import 'package:food_2_hunger/uitest/marketplace.dart';
 
 int navigationBarItem = 0;
 
@@ -33,8 +34,10 @@ class _BottomNavigationStatefulState extends State<BottomNavigationStateful> {
     } else if (value == 1) {
       navigatorNavigateTo(context, navigationChild: const FoodDonation());
     } else if (value == 2) {
-      navigatorNavigateTo(context, navigationChild: ListingDonation());
+      navigatorNavigateTo(context, navigationChild: const ListingDonation());
     } else if (value == 3) {
+      navigatorNavigateTo(context, navigationChild: const MarketPlace());
+    } else if (value == 4) {
       navigatorNavigateTo(context, navigationChild: const Profile());
     }
   }
@@ -53,6 +56,8 @@ class _BottomNavigationStatefulState extends State<BottomNavigationStateful> {
           ),
           BottomNavigationBarItem(icon: Icon(Icons.add), label: "Add Donation"),
           BottomNavigationBarItem(icon: Icon(Icons.list), label: "Listing"),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.account_circle), label: "Marketplace"),
           BottomNavigationBarItem(
               icon: Icon(Icons.account_circle), label: "Profile"),
         ]);

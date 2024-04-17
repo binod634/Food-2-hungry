@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:food_2_hunger/Login/login.dart';
 import 'package:food_2_hunger/algorithm/screensize.dart';
 import 'package:food_2_hunger/algorithm/shader.dart';
+import 'package:food_2_hunger/database/database.dart';
 import 'package:food_2_hunger/elements/bottomnavigation.dart';
 import 'package:food_2_hunger/elements/label.dart';
 import 'package:food_2_hunger/design/cardcontainer.dart';
 import 'package:food_2_hunger/themeData/theme.dart';
 import 'package:food_2_hunger/uitest/adddonation.dart';
+import 'package:mysql1/mysql1.dart';
 
 import '../algorithm/navigate.dart';
 
@@ -32,60 +34,67 @@ class AppHomeUiState extends StatefulWidget {
 class _AppHomeUiStateState extends State<AppHomeUiState> {
   int currentBottomBarindex = 0;
   void doSomething() {}
+
+  @override
+  void initState() {
+    super.initState();
+    getDonationList();
+  }
+
+  void getDonationList() async {
+    var conn = await MySqlConnection.connect(databaseSettings);
+    var result = conn.query("Select title,amount,date from `completedOrder`")
+        as List<Map<String, dynamic>>;
+    setState(() {
+      latestDonations = result;
+    });
+  }
+
   List<Map<String, dynamic>> latestDonations = [
     {
       "title": "Helping Hands Organization",
       "amount": "\$100",
       "date": "April 1, 2024",
-      "image": "assets/foodorg.png",
     },
     {
       "title": "Food for All Charity",
       "amount": "\$50",
       "date": "March 28, 2024",
-      "image": "assets/clothesorg.png",
     },
     {
       "title": "Education Empowerment Fund",
       "amount": "\$80",
       "date": "March 25, 2024",
-      "image": "assets/foodorg.png",
     },
     {
       "title": "MediCare Relief Initiative",
       "amount": "\$120",
       "date": "March 20, 2024",
-      "image": "assets/firstaidorg.png",
     },
     {
       "title": "Clothing Drive Foundation",
       "amount": "\$70",
       "date": "March 15, 2024",
-      "image": "assets/foodorg.png",
     },
     {
       "title": "Clothing Drive Foundation",
       "amount": "\$70",
       "date": "March 15, 2024",
-      "image": "assets/foodorg.png",
     },
     {
       "title": "Random Food Foundation",
       "amount": "\$70",
       "date": "March 11, 2023",
-      "image": "assets/foodorg.png",
     },
     {
       "title": "Clothing Drive Foundation",
       "amount": "\$70",
       "date": "March 15, 2024",
-      "image": "assets/foodorg.png",
     },
     {
       "title": "Clothing Drive Foundation",
       "amount": "\$70",
       "date": "March 15, 2024",
-      "image": "assets/foodorg.png",
     },
   ];
   @override
@@ -289,8 +298,8 @@ class DonationItem extends StatelessWidget {
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            CircleAvatar(
-              backgroundImage: AssetImage(donation["image"]),
+            const CircleAvatar(
+              backgroundImage: AssetImage("assets/image.jpeg"),
               radius: 30,
             ),
             const SizedBox(width: 16),
