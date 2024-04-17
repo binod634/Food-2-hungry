@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:food_2_hunger/algorithm/shader.dart';
 
 Widget titleLabel(BuildContext context,
-    {double ssize = 36, TextAlign align = TextAlign.center}) {
-  return Text("Food 2 Hungry",
+    {double ssize = 36,
+    TextAlign align = TextAlign.center,
+    String str = "Food 2 Hungry"}) {
+  return Text(str,
       textAlign: align,
       style: TextStyle(
           fontFamily: 'joti',

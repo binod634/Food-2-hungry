@@ -32,7 +32,9 @@ class _LoginSelectionScreenState extends State<LoginSelectionScreen> {
       // backgroundColor: const Color.fromARGB(255, 107, 230, 236),
       body: Stack(
         children: [
-          const ContainerCircle(),
+          const ContainerCircle(
+            height: 0.45,
+          ),
           Column(
             // mainAxisAlignment: MainAxisAlignment.center,
             // crossAxisAlignment: CrossAxisAlignment.start,

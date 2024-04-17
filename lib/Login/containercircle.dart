@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:food_2_hunger/algorithm/screensize.dart';
 
 class ContainerCircle extends StatelessWidget {
   const ContainerCircle({super.key, required this.height});
   final double height;
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: screenheight(context) * 1,
-      width: screenwidth(context) * 1,
+    return OverflowBox(
+      maxWidth: MediaQuery.of(context).size.width * 1,
       alignment: Alignment.bottomCenter,
       child: Container(
           width: double.infinity,

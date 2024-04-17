@@ -19,7 +19,16 @@ flutter:
 
   uses-material-design: true
   assets:
+  - assets/children.jpg
+  - assets/flutter.png
+  - assets/poor_children.jpg
+  - assets/image.jpeg
+  - assets/childtrans1.png
   - assets/food1.png
+  - assets/pwdicon.png
+  - assets/profile.png
+  - assets/mailicon.png
+  - assets/keyiconorg.png
   fonts:
     - family: joti
       fonts:
