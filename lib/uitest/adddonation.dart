@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:food_2_hunger/database/database.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:food_2_hunger/algorithm/screensize.dart';
 import 'package:food_2_hunger/design/profilecontainer.dart';
@@ -8,6 +9,7 @@ import 'package:food_2_hunger/elements/bottomnavigation.dart';
 import 'package:food_2_hunger/elements/label.dart';
 import 'package:food_2_hunger/themeData/theme.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:mysql1/mysql1.dart';
 
 class FoodDonation extends StatelessWidget {
   const FoodDonation({super.key});
@@ -27,28 +29,29 @@ class ProfileStateful extends StatefulWidget {
 
 class _ProfileStatefulState extends State<ProfileStateful> {
   final ImagePicker picker = ImagePicker();
-  List<XFile> images = List.empty(growable: true);
+  XFile? images;
   Position? locationData;
   String? locationErrorMsg;
   String? title;
   String? description;
   String? pickupLocation;
-  String? emailAddress;
   String? phoneNumber;
   String? errorString;
 
   void doSomethings() {}
   void pickImages() async {
     final ImagePicker picker = ImagePicker();
-    List<XFile> tmp = await picker.pickMultiImage();
+    final XFile? image = await picker.pickImage(source: ImageSource.gallery);
     setState(() {
-      images = tmp;
+      if (image != null) {
+        images = image;
+      }
     });
   }
 
-  void removeImageFromList(index) {
+  void removeImageFromList() {
     setState(() {
-      images.removeAt(index);
+      images = null;
     });
   }
 
@@ -59,13 +62,20 @@ class _ProfileStatefulState extends State<ProfileStateful> {
     return false;
   }
 
-  bool valudateForm() {
-    if (checkNull(title)) return false;
-    if (checkNull(pickupLocation)) return false;
-    if (checkNull(description)) return false;
-    if (checkNull(emailAddress)) return false;
-    if (checkNull(phoneNumber)) return false;
-    return true;
+  void valudateForm() {
+    if (images != null) return;
+    if (checkNull(title)) return;
+    if (checkNull(pickupLocation)) return;
+    if (checkNull(description)) return;
+    if (checkNull(phoneNumber)) return;
+    uploadToDatabase();
+  }
+
+  void uploadToDatabase() async {
+    var conn = await MySqlConnection.connect(databaseSettings);
+    await conn.query(
+        'INSERT INTO donationdata (title, description, location, phone, image) VALUES (?, ?, ?, ?, ?)',
+        [title, description, locationData, phoneNumber, images]);
   }
 
   void _determinePosition() async {
@@ -137,12 +147,12 @@ class _ProfileStatefulState extends State<ProfileStateful> {
                     child: Column(
                       children: [
                         Column(children: [
-                          images.isEmpty
+                          images == null
                               ? GestureDetector(
                                   onTap: pickImages,
                                   child: Container(
-                                    height: 120,
-                                    width: 120,
+                                    height: 130,
+                                    width: 130,
                                     decoration: BoxDecoration(
                                       shape: BoxShape.circle,
                                       color: Colors.grey[100],
@@ -156,36 +166,30 @@ class _ProfileStatefulState extends State<ProfileStateful> {
                                 )
                               : SizedBox(
                                   height: 120, // Specify a height here
-                                  child: ListView.builder(
-                                    scrollDirection: Axis.horizontal,
-                                    itemCount: images.length,
-                                    itemBuilder: (BuildContext context, int i) {
-                                      return Stack(
-                                        children: <Widget>[
-                                          SizedBox(
-                                            height: 100,
-                                            width: 100,
-                                            child: Padding(
-                                              padding: const EdgeInsets.all(10),
-                                              child: Image.file(
-                                                File(images[i].path),
-                                                fit: BoxFit.cover,
-                                              ),
-                                            ),
+                                  child: Stack(
+                                    children: <Widget>[
+                                      SizedBox(
+                                        height: 120,
+                                        width: 120,
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(10),
+                                          child: Image.file(
+                                            File(images!.path),
+                                            fit: BoxFit.cover,
                                           ),
-                                          Positioned(
-                                            right: 1,
-                                            child: GestureDetector(
-                                              onTap: () {
-                                                removeImageFromList(i);
-                                              },
-                                              child: const Icon(Icons.cancel,
-                                                  color: Colors.red),
-                                            ),
-                                          )
-                                        ],
-                                      );
-                                    },
+                                        ),
+                                      ),
+                                      Positioned(
+                                        right: 1,
+                                        child: GestureDetector(
+                                          onTap: () {
+                                            removeImageFromList();
+                                          },
+                                          child: const Icon(Icons.cancel,
+                                              color: Colors.red),
+                                        ),
+                                      )
+                                    ],
                                   ),
                                 ),
                           const Text(
@@ -245,17 +249,6 @@ class _ProfileStatefulState extends State<ProfileStateful> {
                                     ? "${locationData!.longitude} + ${locationData!.latitude}"
                                     : "Click to get current location"),
                               ),
-                              const SizedBox(height: 10),
-                              TextField(
-                                onChanged: (value) {
-                                  setState(() {
-                                    emailAddress = value;
-                                  });
-                                },
-                                decoration: const InputDecoration(
-                                    hintText: "Email Address",
-                                    icon: Icon(Icons.mail)),
-                              ),
                               const SizedBox(
                                 height: 10,
                               ),
@@ -273,8 +266,9 @@ class _ProfileStatefulState extends State<ProfileStateful> {
                               const SizedBox(
                                 height: 20,
                               ),
-                              const FilledButton(
-                                  onPressed: null, child: Text("Add Listing"))
+                              FilledButton(
+                                  onPressed: uploadToDatabase,
+                                  child: const Text("Add Listing"))
                             ],
                           ),
                         ),

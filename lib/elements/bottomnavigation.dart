@@ -57,7 +57,7 @@ class _BottomNavigationStatefulState extends State<BottomNavigationStateful> {
           BottomNavigationBarItem(icon: Icon(Icons.add), label: "Add Donation"),
           BottomNavigationBarItem(icon: Icon(Icons.list), label: "Listing"),
           BottomNavigationBarItem(
-              icon: Icon(Icons.account_circle), label: "Marketplace"),
+              icon: Icon(Icons.shopify), label: "Marketplace"),
           BottomNavigationBarItem(
               icon: Icon(Icons.account_circle), label: "Profile"),
         ]);

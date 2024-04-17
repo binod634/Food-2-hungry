@@ -25,6 +25,16 @@ class ProfileStateful extends StatefulWidget {
 }
 
 class _ProfileStatefulState extends State<ProfileStateful> {
+  var profileData = <Map<String, String>>[
+    {
+      'fullname': "Binod Kandel",
+      "role": "Volunteer",
+      "address": "Butwal",
+      "contact": "9765571925",
+      "email": "kandelbinod634@gmail.com",
+      "image": "image.jpeg"
+    },
+  ];
   void doSomethings() {}
   @override
   Widget build(BuildContext context) {

@@ -49,6 +49,7 @@ class ProfileLabel extends StatelessWidget {
                   alignment: Alignment.bottomLeft,
                   child: Text(
                     dataString,
+                    maxLines: 1,
                     style: const TextStyle(fontSize: 24, fontFamily: "jua"),
                   ),
                 )),

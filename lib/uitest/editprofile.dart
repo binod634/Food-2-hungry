@@ -106,7 +106,7 @@ class _EditProfileStatefulState extends State<EditProfileStateful> {
                                     });
                                   },
                                   decoration: const InputDecoration(
-                                    hintText: "97xxxxxxxx",
+                                    hintText: "9765571925",
                                   ),
                                 ),
                                 SizedBox(height: screenheight(context) * 0.04),

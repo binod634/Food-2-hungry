@@ -3,6 +3,7 @@ import 'package:food_2_hunger/Login/login.dart';
 import 'package:food_2_hunger/algorithm/screensize.dart';
 import 'package:food_2_hunger/algorithm/shader.dart';
 import 'package:food_2_hunger/database/database.dart';
+import 'package:food_2_hunger/database/http.dart';
 import 'package:food_2_hunger/elements/bottomnavigation.dart';
 import 'package:food_2_hunger/elements/label.dart';
 import 'package:food_2_hunger/design/cardcontainer.dart';
@@ -43,8 +44,8 @@ class _AppHomeUiStateState extends State<AppHomeUiState> {
 
   void getDonationList() async {
     var conn = await MySqlConnection.connect(databaseSettings);
-    var result =
-        await conn.query("SELECT title, amount, date FROM `completedOrder`");
+    var result = await conn
+        .query("SELECT title, amount, pickloc,image FROM `completedOrder`");
 
     List<Map<String, dynamic>> parsedDonations = [];
 
@@ -52,8 +53,8 @@ class _AppHomeUiStateState extends State<AppHomeUiState> {
       parsedDonations.add({
         "title": row['title'],
         "amount": "\$${row['amount']}",
-        "date": row['date'].toString(),
-        "image": row['image'].toString(),
+        "pickloc": row['pickloc'].toString(),
+        "image": row['image'],
       });
     }
 
@@ -66,47 +67,56 @@ class _AppHomeUiStateState extends State<AppHomeUiState> {
     {
       "title": "Helping Hands Organization",
       "amount": "\$100",
-      "date": "April 1, 2024",
+      "pickloc": "April 1, 2024",
+      "image": "image.jpeg"
     },
     {
       "title": "Food for All Charity",
       "amount": "\$50",
-      "date": "March 28, 2024",
+      "pickloc": "March 28, 2024",
+      "image": "image.jpeg"
     },
     {
       "title": "Education Empowerment Fund",
       "amount": "\$80",
-      "date": "March 25, 2024",
+      "pickloc": "March 25, 2024",
+      "image": "image.jpeg"
     },
     {
       "title": "MediCare Relief Initiative",
       "amount": "\$120",
-      "date": "March 20, 2024",
+      "pickloc": "March 20, 2024",
+      "image": "image.jpeg"
     },
     {
       "title": "Clothing Drive Foundation",
       "amount": "\$70",
-      "date": "March 15, 2024",
+      "pickloc": "March 15, 2024",
+      "image": "image.jpeg"
     },
     {
       "title": "Clothing Drive Foundation",
       "amount": "\$70",
-      "date": "March 15, 2024",
+      "pickloc": "March 15, 2024",
+      "image": "image.jpeg"
     },
     {
       "title": "Random Food Foundation",
       "amount": "\$70",
-      "date": "March 11, 2023",
+      "pickloc": "March 11, 2023",
+      "image": "image.jpeg"
     },
     {
       "title": "Clothing Drive Foundation",
       "amount": "\$70",
-      "date": "March 15, 2024",
+      "pickloc": "March 15, 2024",
+      "image": "image.jpeg"
     },
     {
       "title": "Clothing Drive Foundation",
       "amount": "\$70",
-      "date": "March 15, 2024",
+      "pickloc": "March 15, 2024",
+      "image": "image.jpeg"
     },
   ];
   @override
@@ -310,9 +320,15 @@ class DonationItem extends StatelessWidget {
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            const CircleAvatar(
-              backgroundImage: AssetImage("assets/image.jpeg"),
-              radius: 30,
+            SizedBox(
+              height: 100,
+              child: ClipOval(
+                child: Image.network(
+                  "$httpServer${donation["image"]}",
+                  fit: BoxFit
+                      .cover, // You can adjust the BoxFit property as needed
+                ),
+              ),
             ),
             const SizedBox(width: 16),
             Expanded(
@@ -337,7 +353,7 @@ class DonationItem extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    "Date: ${donation["date"]}",
+                    "Location: ${donation["pickloc"]}",
                     style: const TextStyle(
                       color: Colors.white,
                       fontSize: 14,
