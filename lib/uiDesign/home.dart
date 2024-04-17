@@ -1,32 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:food_2_hunger/themeData/theme.dart';
 
-class AppHome extends StatelessWidget {
-  const AppHome({super.key});
+class AppHomeUi extends StatelessWidget {
+  const AppHomeUi({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(theme: lightColorScheme, home: const AppHomeStateful());
+    return MaterialApp(
+      theme: lightColorScheme,
+      home: const AppHomeUiState(),
+    );
   }
 }
 
-class AppHomeStateful extends StatefulWidget {
-  const AppHomeStateful({super.key});
+class AppHomeUiState extends StatefulWidget {
+  const AppHomeUiState({super.key});
 
   @override
-  createState() => _AppHomeStatefulState();
+  createState() => _AppHomeUiStateState();
 }
 
-class _AppHomeStatefulState extends State<AppHomeStateful> {
+class _AppHomeUiStateState extends State<AppHomeUiState> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text("Food 2 Hunger"),
-      ),
-      body: Container(
-        color: Colors.blue,
-      ),
+    return Container(
+      child: null,
     );
   }
 }
