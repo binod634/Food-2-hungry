@@ -7,6 +7,7 @@ import 'package:food_2_hunger/design/profilecontainer.dart';
 import 'package:food_2_hunger/elements/bottomnavigation.dart';
 import 'package:food_2_hunger/elements/label.dart';
 import 'package:food_2_hunger/themeData/theme.dart';
+import 'package:geolocator/geolocator.dart';
 
 class FoodDonation extends StatelessWidget {
   const FoodDonation({super.key});
@@ -27,6 +28,8 @@ class ProfileStateful extends StatefulWidget {
 class _ProfileStatefulState extends State<ProfileStateful> {
   final ImagePicker picker = ImagePicker();
   List<XFile> images = List.empty(growable: true);
+  Position? locationData;
+  String? locationErrorMsg;
 
   void doSomethings() {}
   void pickImages() async {
@@ -40,6 +43,48 @@ class _ProfileStatefulState extends State<ProfileStateful> {
   void removeImageFromList(index) {
     setState(() {
       images.removeAt(index);
+    });
+  }
+
+  void _determinePosition() async {
+    bool serviceEnabled;
+    LocationPermission permission;
+
+    // Test if location services are enabled.
+    serviceEnabled = await Geolocator.isLocationServiceEnabled();
+    if (!serviceEnabled) {
+      setState(() {
+        locationErrorMsg = "Location Disabled.";
+      });
+      return;
+    }
+
+    permission = await Geolocator.checkPermission();
+    if (permission == LocationPermission.denied) {
+      permission = await Geolocator.requestPermission();
+      if (permission == LocationPermission.denied) {
+        setState(() {
+          locationErrorMsg = "Denied";
+        });
+      }
+      return;
+    }
+
+    if (permission == LocationPermission.deniedForever) {
+      // Permissions are denied forever, handle appropriately.
+      setState(() {
+        locationErrorMsg = "Denied";
+      });
+      return;
+    }
+
+    // When we reach here, permissions are granted and we can
+    // continue accessing the position of the device.
+
+    Position position = await Geolocator.getCurrentPosition(
+        desiredAccuracy: LocationAccuracy.high);
+    setState(() {
+      locationData = position;
     });
   }
 
@@ -132,44 +177,51 @@ class _ProfileStatefulState extends State<ProfileStateful> {
                             color: Colors.white,
                             borderRadius: BorderRadius.circular(10),
                           ),
-                          child: const Column(
+                          child: Column(
                             children: [
-                              TextField(
+                              const TextField(
                                 decoration: InputDecoration(
                                   hintText: "Name/Title.",
                                   icon: Icon(Icons.food_bank),
                                 ),
                               ),
-                              SizedBox(height: 10),
-                              TextField(
+                              const SizedBox(height: 10),
+                              const TextField(
                                 decoration: InputDecoration(
                                   hintText: "Short Description.",
                                   icon: Icon(Icons.description),
                                 ),
                               ),
-                              SizedBox(height: 10),
+                              const SizedBox(height: 10),
                               TextField(
-                                decoration: InputDecoration(
+                                onChanged: (s) => {_determinePosition()},
+                                decoration: const InputDecoration(
                                   hintText: "Pickup Location.",
                                   icon: Icon(Icons.location_on),
                                 ),
                               ),
-                              SizedBox(height: 10),
-                              TextField(
+                              MaterialButton(
+                                onPressed: _determinePosition,
+                                child: Text(locationData != null
+                                    ? "${locationData!.longitude} + ${locationData!.latitude}"
+                                    : "Click to get current location"),
+                              ),
+                              const SizedBox(height: 10),
+                              const TextField(
                                 decoration: InputDecoration(
                                     hintText: "Email Address",
                                     icon: Icon(Icons.mail)),
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 height: 10,
                               ),
-                              TextField(
+                              const TextField(
                                 decoration: InputDecoration(
                                     hintText: "Phone Number. *Optional",
                                     icon: Icon(Icons.phone)),
                               ),
-                              SizedBox(height: 10),
-                              Visibility(
+                              const SizedBox(height: 10),
+                              const Visibility(
                                 visible: false,
                                 child: Row(
                                   children: [
@@ -179,12 +231,6 @@ class _ProfileStatefulState extends State<ProfileStateful> {
                                       "Pick-up Date:",
                                       style: TextStyle(fontSize: 14),
                                     ),
-                                    Spacer(),
-                                    // DatePickerDialog(
-                                    //     firstDate: DateTime.now(),
-                                    //     lastDate: DateTime.now())
-                                    // Replace with actual DatePicker widget
-                                    // const DatePicker(), // DatePicker implementation here
                                   ],
                                 ),
                               )
