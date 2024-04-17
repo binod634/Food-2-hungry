@@ -100,45 +100,84 @@ class _ProfileStatefulState extends State<ProfileStateful> {
                         itemCount: itemList.length,
                         itemBuilder: (BuildContext context, int index) {
                           return Card(
-                            color: Theme.of(context).colorScheme.secondary,
+                            color: Colors.white,
                             margin: const EdgeInsets.symmetric(
                                 horizontal: 20, vertical: 10),
-                            child: ListTile(
-                              leading: CircleAvatar(
-                                backgroundImage:
-                                    AssetImage(itemList[index]["image"]),
-                              ),
-                              title: Text(
-                                itemList[index]["title"],
-                                style: const TextStyle(
-                                    fontWeight: FontWeight.bold),
-                              ),
-                              subtitle: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    itemList[index]["description"],
-                                    style: const TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      // fontSize: 32
-                                    ),
-                                  ),
-                                  const SizedBox(height: 5),
-                                  Text(
-                                    'Time: ${itemList[index]["time"]}',
-                                    style: const TextStyle(
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                  Text(
-                                    'Quantity: ${itemList[index]["quantity"]}',
-                                    style: const TextStyle(
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                ],
-                              ),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                            child: InkWell(
                               onTap: () {
                                 // Handle tap on the item
                               },
+                              child: Padding(
+                                padding: const EdgeInsets.all(16),
+                                child: Row(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Center(
+                                      child: ClipOval(
+                                        child: Image.asset(
+                                          itemList[index]["image"],
+                                          width:
+                                              64, // Specify width of the circular image
+                                          height:
+                                              64, // Specify height of the circular image
+                                        ),
+                                      ),
+                                    ),
+                                    const SizedBox(
+                                        width:
+                                            16), // Add some space between leading and title
+                                    Expanded(
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            itemList[index]["title"],
+                                            style: const TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 18,
+                                              color: Colors.black87,
+                                            ),
+                                          ),
+                                          const SizedBox(
+                                              height:
+                                                  8), // Add some space between title and description
+                                          Text(
+                                            itemList[index]["description"],
+                                            style: const TextStyle(
+                                              fontWeight: FontWeight.normal,
+                                              fontSize: 16,
+                                              color: Colors.black54,
+                                            ),
+                                          ),
+                                          const SizedBox(
+                                              height:
+                                                  4), // Add some space between description and other subtitles
+                                          Text(
+                                            'Time: ${itemList[index]["time"]}',
+                                            style: const TextStyle(
+                                              fontWeight: FontWeight.normal,
+                                              fontSize: 14,
+                                              color: Colors.grey,
+                                            ),
+                                          ),
+                                          Text(
+                                            'Quantity: ${itemList[index]["quantity"]}',
+                                            style: const TextStyle(
+                                              fontWeight: FontWeight.normal,
+                                              fontSize: 14,
+                                              color: Colors.grey,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
                             ),
                           );
                         },

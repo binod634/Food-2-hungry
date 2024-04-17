@@ -66,55 +66,55 @@ class _AppHomeUiStateState extends State<AppHomeUiState> {
   List<Map<String, dynamic>> latestDonations = [
     {
       "title": "Helping Hands Organization",
-      "phone": "\$100",
+      "phone": "98000",
       "pickloc": "April 1, 2024",
       "image": "image.jpeg"
     },
     {
       "title": "Food for All Charity",
-      "phone": "\$50",
+      "phone": "98000",
       "pickloc": "March 28, 2024",
       "image": "image.jpeg"
     },
     {
       "title": "Education Empowerment Fund",
-      "phone": "\$80",
+      "phone": "98000",
       "pickloc": "March 25, 2024",
       "image": "image.jpeg"
     },
     {
       "title": "MediCare Relief Initiative",
-      "phone": "\$120",
+      "phone": "98000",
       "pickloc": "March 20, 2024",
       "image": "image.jpeg"
     },
     {
       "title": "Clothing Drive Foundation",
-      "phone": "\$70",
+      "phone": "98000",
       "pickloc": "March 15, 2024",
       "image": "image.jpeg"
     },
     {
       "title": "Clothing Drive Foundation",
-      "phone": "\$70",
+      "phone": "98000",
       "pickloc": "March 15, 2024",
       "image": "image.jpeg"
     },
     {
       "title": "Random Food Foundation",
-      "phone": "\$70",
+      "phone": "98000",
       "pickloc": "March 11, 2023",
       "image": "image.jpeg"
     },
     {
       "title": "Clothing Drive Foundation",
-      "phone": "\$70",
+      "phone": "98000",
       "pickloc": "March 15, 2024",
       "image": "image.jpeg"
     },
     {
       "title": "Clothing Drive Foundation",
-      "phone": "\$70",
+      "phone": "98000",
       "pickloc": "March 15, 2024",
       "image": "image.jpeg"
     },
@@ -322,11 +322,12 @@ class DonationItem extends StatelessWidget {
           children: [
             SizedBox(
               height: 100,
+              width: 100,
               child: ClipOval(
                 child: Image.network(
                   "$httpServer${donation["image"]}",
                   fit: BoxFit
-                      .cover, // You can adjust the BoxFit property as needed
+                      .fill, // You can adjust the BoxFit property as needed
                 ),
               ),
             ),
@@ -346,7 +347,7 @@ class DonationItem extends StatelessWidget {
                   ),
                   const SizedBox(height: 5),
                   Text(
-                    "Donated: ${donation["amount"]}",
+                    "Contact: ${donation["phone"]}",
                     style: const TextStyle(
                       color: Colors.white,
                       fontSize: 14,
