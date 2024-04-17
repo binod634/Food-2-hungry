@@ -43,10 +43,22 @@ class _AppHomeUiStateState extends State<AppHomeUiState> {
 
   void getDonationList() async {
     var conn = await MySqlConnection.connect(databaseSettings);
-    var result = conn.query("Select title,amount,date from `completedOrder`")
-        as List<Map<String, dynamic>>;
+    var result =
+        await conn.query("SELECT title, amount, date FROM `completedOrder`");
+
+    List<Map<String, dynamic>> parsedDonations = [];
+
+    for (var row in result) {
+      parsedDonations.add({
+        "title": row['title'],
+        "amount": "\$${row['amount']}",
+        "date": row['date'].toString(),
+        "image": row['image'].toString(),
+      });
+    }
+
     setState(() {
-      latestDonations = result;
+      latestDonations = parsedDonations;
     });
   }
 
