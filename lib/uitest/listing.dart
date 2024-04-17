@@ -43,6 +43,27 @@ class _ProfileStatefulState extends State<ProfileStateful> {
       'time': '11:30 AM',
       'quantity': 1,
     },
+    {
+      'image': 'assets/image.jpeg',
+      'title': 'Item 2',
+      'description': 'Description for item 2',
+      'time': '11:30 AM',
+      'quantity': 1,
+    },
+    {
+      'image': 'assets/image.jpeg',
+      'title': 'Item 2',
+      'description': 'Description for item 2',
+      'time': '11:30 AM',
+      'quantity': 1,
+    },
+    {
+      'image': 'assets/image.jpeg',
+      'title': 'Item 2',
+      'description': 'Description for item 2',
+      'time': '11:30 AM',
+      'quantity': 1,
+    },
     // Add more items as needed
   ];
 
@@ -74,27 +95,45 @@ class _ProfileStatefulState extends State<ProfileStateful> {
                       ),
                     ),
                     SizedBox(
-                      height: screenheight(context) * 0.8,
+                      height: screenheight(context) * 0.7,
                       child: ListView.builder(
                         itemCount: itemList.length,
                         itemBuilder: (BuildContext context, int index) {
                           return Card(
-                            color: Colors.lightBlue,
-                            margin: const EdgeInsets.all(10),
+                            color: Theme.of(context).colorScheme.secondary,
+                            margin: const EdgeInsets.symmetric(
+                                horizontal: 20, vertical: 10),
                             child: ListTile(
                               leading: CircleAvatar(
                                 backgroundImage:
                                     AssetImage(itemList[index]["image"]),
                               ),
-                              title: Text(itemList[index]["title"]),
+                              title: Text(
+                                itemList[index]["title"],
+                                style: const TextStyle(
+                                    fontWeight: FontWeight.bold),
+                              ),
                               subtitle: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text(itemList[index]["description"]),
-                                  const SizedBox(height: 5),
-                                  Text('Time: ${itemList[index]["time"]}'),
                                   Text(
-                                      'Quantity: ${itemList[index]["quantity"]}'),
+                                    itemList[index]["description"],
+                                    style: const TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      // fontSize: 32
+                                    ),
+                                  ),
+                                  const SizedBox(height: 5),
+                                  Text(
+                                    'Time: ${itemList[index]["time"]}',
+                                    style: const TextStyle(
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                  Text(
+                                    'Quantity: ${itemList[index]["quantity"]}',
+                                    style: const TextStyle(
+                                        fontWeight: FontWeight.bold),
+                                  ),
                                 ],
                               ),
                               onTap: () {

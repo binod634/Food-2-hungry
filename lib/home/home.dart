@@ -130,7 +130,7 @@ class _AppHomeUiStateState extends State<AppHomeUiState> {
                       ],
                     ),
                   ),
-                  SizedBox(height: screenheight(context) * 0.025),
+                  SizedBox(height: screenheight(context) * 0.02),
                   SizedBox(
                     height: screenheight(context) * 0.25,
                     child: Container(
@@ -193,7 +193,7 @@ class _AppHomeUiStateState extends State<AppHomeUiState> {
                         ])),
                   ),
                   SizedBox(
-                    height: screenheight(context) * 0.025,
+                    height: screenheight(context) * 0.02,
                   ),
                   SizedBox(
                     height: screenheight(context) * 0.05,
@@ -203,7 +203,7 @@ class _AppHomeUiStateState extends State<AppHomeUiState> {
                       style: returnHeaderTextStyle(context),
                     ),
                   ),
-                  SizedBox(height: screenheight(context) * 0.025),
+                  SizedBox(height: screenheight(context) * 0.02),
                   SizedBox(
                     height: screenheight(context) * 0.1,
                     child: Row(
@@ -233,7 +233,7 @@ class _AppHomeUiStateState extends State<AppHomeUiState> {
                     ),
                   ),
                   SizedBox(
-                    height: screenheight(context) * 0.025,
+                    height: screenheight(context) * 0.02,
                   ),
                   SizedBox(
                     height: screenheight(context) * 0.05,
@@ -244,7 +244,7 @@ class _AppHomeUiStateState extends State<AppHomeUiState> {
                     ),
                   ),
                   SizedBox(
-                    height: screenheight(context) * 0.025,
+                    height: screenheight(context) * 0.02,
                   ),
                   SizedBox(
                       height: screenheight(context) * 0.6,
