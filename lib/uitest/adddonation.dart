@@ -30,6 +30,12 @@ class _ProfileStatefulState extends State<ProfileStateful> {
   List<XFile> images = List.empty(growable: true);
   Position? locationData;
   String? locationErrorMsg;
+  String? title;
+  String? description;
+  String? pickupLocation;
+  String? emailAddress;
+  String? phoneNumber;
+  String? errorString;
 
   void doSomethings() {}
   void pickImages() async {
@@ -44,6 +50,22 @@ class _ProfileStatefulState extends State<ProfileStateful> {
     setState(() {
       images.removeAt(index);
     });
+  }
+
+  bool checkNull(value) {
+    if (value == null) {
+      return true;
+    }
+    return false;
+  }
+
+  bool valudateForm() {
+    if (checkNull(title)) return false;
+    if (checkNull(pickupLocation)) return false;
+    if (checkNull(description)) return false;
+    if (checkNull(emailAddress)) return false;
+    if (checkNull(phoneNumber)) return false;
+    return true;
   }
 
   void _determinePosition() async {
@@ -182,22 +204,36 @@ class _ProfileStatefulState extends State<ProfileStateful> {
                           ),
                           child: Column(
                             children: [
-                              const TextField(
-                                decoration: InputDecoration(
+                              TextField(
+                                onChanged: (value) {
+                                  setState(() {
+                                    title = value;
+                                  });
+                                },
+                                decoration: const InputDecoration(
                                   hintText: "Name/Title.",
                                   icon: Icon(Icons.food_bank),
                                 ),
                               ),
                               const SizedBox(height: 10),
-                              const TextField(
-                                decoration: InputDecoration(
+                              TextField(
+                                onChanged: (value) {
+                                  setState(() {
+                                    description = value;
+                                  });
+                                },
+                                decoration: const InputDecoration(
                                   hintText: "Short Description.",
                                   icon: Icon(Icons.description),
                                 ),
                               ),
                               const SizedBox(height: 10),
                               TextField(
-                                onChanged: (s) => {_determinePosition()},
+                                onChanged: (value) {
+                                  setState(() {
+                                    pickupLocation = value;
+                                  });
+                                },
                                 decoration: const InputDecoration(
                                   hintText: "Pickup Location.",
                                   icon: Icon(Icons.location_on),
@@ -210,25 +246,35 @@ class _ProfileStatefulState extends State<ProfileStateful> {
                                     : "Click to get current location"),
                               ),
                               const SizedBox(height: 10),
-                              const TextField(
-                                decoration: InputDecoration(
+                              TextField(
+                                onChanged: (value) {
+                                  setState(() {
+                                    emailAddress = value;
+                                  });
+                                },
+                                decoration: const InputDecoration(
                                     hintText: "Email Address",
                                     icon: Icon(Icons.mail)),
                               ),
                               const SizedBox(
                                 height: 10,
                               ),
-                              const TextField(
-                                decoration: InputDecoration(
+                              TextField(
+                                onChanged: (value) {
+                                  setState(() {
+                                    phoneNumber = value;
+                                  });
+                                },
+                                keyboardType: TextInputType.phone,
+                                decoration: const InputDecoration(
                                     hintText: "Phone Number. *Optional",
                                     icon: Icon(Icons.phone)),
                               ),
                               const SizedBox(
-                                height: 10,
+                                height: 20,
                               ),
-                              FilledButton(
-                                  onPressed: doSomethings,
-                                  child: const Text("Add Listing"))
+                              const FilledButton(
+                                  onPressed: null, child: Text("Add Listing"))
                             ],
                           ),
                         ),
