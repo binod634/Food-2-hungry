@@ -1,11 +1,8 @@
 import 'package:mysql1/mysql1.dart';
 
+String ip = '10.42.0.1';
 var databaseSettings = ConnectionSettings(
-    host: '10.42.0.1',
-    port: 3306,
-    user: 'mysql',
-    password: 'mysql',
-    db: 'fooddb');
+    host: ip, port: 3306, user: 'mysql', password: 'mysql', db: 'fooddb');
 
 void connectDatabase() async {
   var conn = await MySqlConnection.connect(databaseSettings);

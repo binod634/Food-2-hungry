@@ -45,15 +45,15 @@ class _AppHomeUiStateState extends State<AppHomeUiState> {
   void getDonationList() async {
     var conn = await MySqlConnection.connect(databaseSettings);
     var result = await conn
-        .query("SELECT title, amount, pickloc,image FROM `completedOrder`");
+        .query("SELECT title, phone, location,image FROM `donationdata`");
 
     List<Map<String, dynamic>> parsedDonations = [];
 
     for (var row in result) {
       parsedDonations.add({
         "title": row['title'],
-        "amount": "\$${row['amount']}",
-        "pickloc": row['pickloc'].toString(),
+        "phone": "\$${row['phone']}",
+        "pickloc": row['location'].toString(),
         "image": row['image'],
       });
     }
@@ -66,55 +66,55 @@ class _AppHomeUiStateState extends State<AppHomeUiState> {
   List<Map<String, dynamic>> latestDonations = [
     {
       "title": "Helping Hands Organization",
-      "amount": "\$100",
+      "phone": "\$100",
       "pickloc": "April 1, 2024",
       "image": "image.jpeg"
     },
     {
       "title": "Food for All Charity",
-      "amount": "\$50",
+      "phone": "\$50",
       "pickloc": "March 28, 2024",
       "image": "image.jpeg"
     },
     {
       "title": "Education Empowerment Fund",
-      "amount": "\$80",
+      "phone": "\$80",
       "pickloc": "March 25, 2024",
       "image": "image.jpeg"
     },
     {
       "title": "MediCare Relief Initiative",
-      "amount": "\$120",
+      "phone": "\$120",
       "pickloc": "March 20, 2024",
       "image": "image.jpeg"
     },
     {
       "title": "Clothing Drive Foundation",
-      "amount": "\$70",
+      "phone": "\$70",
       "pickloc": "March 15, 2024",
       "image": "image.jpeg"
     },
     {
       "title": "Clothing Drive Foundation",
-      "amount": "\$70",
+      "phone": "\$70",
       "pickloc": "March 15, 2024",
       "image": "image.jpeg"
     },
     {
       "title": "Random Food Foundation",
-      "amount": "\$70",
+      "phone": "\$70",
       "pickloc": "March 11, 2023",
       "image": "image.jpeg"
     },
     {
       "title": "Clothing Drive Foundation",
-      "amount": "\$70",
+      "phone": "\$70",
       "pickloc": "March 15, 2024",
       "image": "image.jpeg"
     },
     {
       "title": "Clothing Drive Foundation",
-      "amount": "\$70",
+      "phone": "\$70",
       "pickloc": "March 15, 2024",
       "image": "image.jpeg"
     },

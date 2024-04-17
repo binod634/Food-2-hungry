@@ -1,2 +1,3 @@
-String ip = "10.42.0.1";
+import 'package:food_2_hunger/database/database.dart';
+
 String httpServer = "http://$ip:8080/";
