@@ -143,9 +143,12 @@ class _ProfileStatefulState extends State<ProfileStateful> {
                                           SizedBox(
                                             height: 100,
                                             width: 100,
-                                            child: Image.file(
-                                              File(images[i].path),
-                                              fit: BoxFit.cover,
+                                            child: Padding(
+                                              padding: const EdgeInsets.all(10),
+                                              child: Image.file(
+                                                File(images[i].path),
+                                                fit: BoxFit.cover,
+                                              ),
                                             ),
                                           ),
                                           Positioned(
@@ -220,20 +223,12 @@ class _ProfileStatefulState extends State<ProfileStateful> {
                                     hintText: "Phone Number. *Optional",
                                     icon: Icon(Icons.phone)),
                               ),
-                              const SizedBox(height: 10),
-                              const Visibility(
-                                visible: false,
-                                child: Row(
-                                  children: [
-                                    Icon(Icons.calendar_today),
-                                    SizedBox(width: 10),
-                                    Text(
-                                      "Pick-up Date:",
-                                      style: TextStyle(fontSize: 14),
-                                    ),
-                                  ],
-                                ),
-                              )
+                              const SizedBox(
+                                height: 10,
+                              ),
+                              FilledButton(
+                                  onPressed: doSomethings,
+                                  child: const Text("Add Listing"))
                             ],
                           ),
                         ),
@@ -243,15 +238,6 @@ class _ProfileStatefulState extends State<ProfileStateful> {
                 ],
               ),
             ],
-          ),
-          // Donation button
-          Center(
-            child: ElevatedButton(
-              onPressed: () {
-                // Handle donation submission logic here
-              },
-              child: const Text("Donate Food"),
-            ),
           ),
         ],
       ),
