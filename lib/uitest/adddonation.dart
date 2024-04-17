@@ -1,5 +1,7 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:food_2_hunger/algorithm/screensize.dart';
 import 'package:food_2_hunger/design/profilecontainer.dart';
 import 'package:food_2_hunger/elements/bottomnavigation.dart';
@@ -23,7 +25,24 @@ class ProfileStateful extends StatefulWidget {
 }
 
 class _ProfileStatefulState extends State<ProfileStateful> {
+  final ImagePicker picker = ImagePicker();
+  List<XFile> images = List.empty(growable: true);
+
   void doSomethings() {}
+  void pickImages() async {
+    final ImagePicker picker = ImagePicker();
+    List<XFile> tmp = await picker.pickMultiImage();
+    setState(() {
+      images = tmp;
+    });
+  }
+
+  void removeImageFromList(index) {
+    setState(() {
+      images.removeAt(index);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -51,22 +70,54 @@ class _ProfileStatefulState extends State<ProfileStateful> {
                     child: Column(
                       children: [
                         Column(children: [
-                          GestureDetector(
-                            onTap: () {},
-                            child: Container(
-                              height: 120,
-                              width: 120,
-                              decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                color: Colors.grey[100],
-                              ),
-                              child: const Icon(
-                                Icons.camera_alt,
-                                size: 60,
-                                color: Colors.grey,
-                              ),
-                            ),
-                          ),
+                          images.isEmpty
+                              ? GestureDetector(
+                                  onTap: pickImages,
+                                  child: Container(
+                                    height: 120,
+                                    width: 120,
+                                    decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      color: Colors.grey[100],
+                                    ),
+                                    child: const Icon(
+                                      Icons.camera_alt,
+                                      size: 60,
+                                      color: Colors.grey,
+                                    ),
+                                  ),
+                                )
+                              : SizedBox(
+                                  height: 120, // Specify a height here
+                                  child: ListView.builder(
+                                    scrollDirection: Axis.horizontal,
+                                    itemCount: images.length,
+                                    itemBuilder: (BuildContext context, int i) {
+                                      return Stack(
+                                        children: <Widget>[
+                                          SizedBox(
+                                            height: 100,
+                                            width: 100,
+                                            child: Image.file(
+                                              File(images[i].path),
+                                              fit: BoxFit.cover,
+                                            ),
+                                          ),
+                                          Positioned(
+                                            right: 1,
+                                            child: GestureDetector(
+                                              onTap: () {
+                                                removeImageFromList(i);
+                                              },
+                                              child: const Icon(Icons.cancel,
+                                                  color: Colors.red),
+                                            ),
+                                          )
+                                        ],
+                                      );
+                                    },
+                                  ),
+                                ),
                           const Text(
                             "Upload Images ",
                             style: TextStyle(fontWeight: FontWeight.bold),
