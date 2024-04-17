@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:walkthrough_test/design/containercircle.dart';
-import 'package:walkthrough_test/algorithm/screensize.dart';
-import 'package:walkthrough_test/elements/label.dart';
-import 'package:walkthrough_test/signup/signup.dart';
-import 'package:walkthrough_test/themeData/theme.dart';
+import 'package:food_2_hunger/design/containercircle.dart';
+import 'package:food_2_hunger/algorithm/screensize.dart';
+import 'package:food_2_hunger/elements/label.dart';
+import 'package:food_2_hunger/signup/signup.dart';
+import 'package:food_2_hunger/themeData/theme.dart';
 
 class AppLogin extends StatelessWidget {
   const AppLogin({super.key});

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:walkthrough_test/algorithm/shader.dart';
+import 'package:food_2_hunger/algorithm/shader.dart';
 
 Widget titleLabel(BuildContext context,
     {double ssize = 36,

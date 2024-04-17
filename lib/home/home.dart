@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:walkthrough_test/Login/login.dart';
-import 'package:walkthrough_test/algorithm/screensize.dart';
-import 'package:walkthrough_test/algorithm/shader.dart';
-import 'package:walkthrough_test/elements/bottomnavigation.dart';
-import 'package:walkthrough_test/elements/label.dart';
-import 'package:walkthrough_test/design/cardcontainer.dart';
-import 'package:walkthrough_test/themeData/theme.dart';
-import 'package:walkthrough_test/uitest/adddonation.dart';
+import 'package:food_2_hunger/Login/login.dart';
+import 'package:food_2_hunger/algorithm/screensize.dart';
+import 'package:food_2_hunger/algorithm/shader.dart';
+import 'package:food_2_hunger/elements/bottomnavigation.dart';
+import 'package:food_2_hunger/elements/label.dart';
+import 'package:food_2_hunger/design/cardcontainer.dart';
+import 'package:food_2_hunger/themeData/theme.dart';
+import 'package:food_2_hunger/uitest/adddonation.dart';
 
 import '../algorithm/navigate.dart';
 

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:walkthrough_test/algorithm/screensize.dart';
+import 'package:food_2_hunger/algorithm/screensize.dart';
 
 class ProfileLabel extends StatelessWidget {
   const ProfileLabel(

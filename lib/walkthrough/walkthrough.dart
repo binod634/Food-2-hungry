@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_walkthrough_screen/flutter_walkthrough_screen.dart';
 import 'package:animated_splash_screen/animated_splash_screen.dart';
-import 'package:walkthrough_test/Login/login.dart';
+import 'package:food_2_hunger/Login/login.dart';
 
 class Walkthrough extends StatelessWidget {
   const Walkthrough({super.key});

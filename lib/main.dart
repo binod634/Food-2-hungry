@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:walkthrough_test/uitest/adddonation.dart';
+import 'package:food_2_hunger/uitest/adddonation.dart';
 
 void main() {
   // runApp(const WalkthroughStateless());

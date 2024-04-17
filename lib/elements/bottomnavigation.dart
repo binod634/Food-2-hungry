@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:walkthrough_test/algorithm/navigate.dart';
-import 'package:walkthrough_test/home/home.dart';
-import 'package:walkthrough_test/uitest/adddonation.dart';
-import 'package:walkthrough_test/home/profile.dart';
+import 'package:food_2_hunger/algorithm/navigate.dart';
+import 'package:food_2_hunger/home/home.dart';
+import 'package:food_2_hunger/uitest/adddonation.dart';
+import 'package:food_2_hunger/home/profile.dart';
 
 int navigationBarItem = 0;
 

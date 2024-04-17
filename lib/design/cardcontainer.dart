@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:walkthrough_test/algorithm/screensize.dart';
+import 'package:food_2_hunger/algorithm/screensize.dart';
 
 Widget returnHomeCardContainer(BuildContext context,
     {required Color backgroundColor,
