@@ -1,3 +1,4 @@
 # food_2_hunger
 
-A new Flutter project.
+Mobile app to donate food.
+Alternative to webapp Food2Hunger.

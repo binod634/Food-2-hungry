@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:food_2_hunger/algorithm/screensize.dart';
 import 'package:food_2_hunger/design/containercircle.dart';
 import 'package:food_2_hunger/themeData/theme.dart';
 
@@ -28,24 +29,19 @@ class _AppHomeState extends State<AppHome> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      // backgroundColor: const Color.fromARGB(255, 107, 230, 236),
       body: Stack(
         children: [
           const ContainerCircle(),
           Column(
-            // crossAxisAlignment: CrossAxisAlignment.start,
-            // shrinkWrap: true,
-            // padding: EdgeInsets.only(
-            // top: MediaQuery.of(context).size.width * 0.5),
             children: [
               SizedBox(
-                height: MediaQuery.of(context).size.height * 0.1,
+                height: screenheight(context) * 0.1,
               ),
               SizedBox(
-                  height: MediaQuery.of(context).size.height * 0.1,
-                  child: const Text("Food 2 Hunger")),
+                  height: screenheight(context) * 0.1,
+                  child: titleLabel(context)),
               SizedBox(
-                  height: MediaQuery.of(context).size.height * 0.3,
+                  height: screenheight(context) * 0.3,
                   child: Padding(
                     padding: const EdgeInsets.only(top: 0),
                     child: Image.asset(
@@ -53,12 +49,12 @@ class _AppHomeState extends State<AppHome> {
                       fit: BoxFit.contain,
                     ),
                   )),
-              SizedBox(height: MediaQuery.of(context).size.height * 0.05),
+              SizedBox(height: screenheight(context) * 0.05),
               SizedBox(
-                  height: MediaQuery.of(context).size.height * 0.1,
+                  height: screenheight(context) * 0.1,
                   child: Padding(
-                      padding: EdgeInsets.only(
-                          right: MediaQuery.of(context).size.width * 0.3),
+                      padding:
+                          EdgeInsets.only(right: screenwidth(context) * 0.3),
                       child: const Text(
                         // textAlign: TextAlign.left,
                         "Login",
@@ -68,8 +64,8 @@ class _AppHomeState extends State<AppHome> {
                             fontFamily: 'joti'),
                       ))),
               SizedBox(
-                height: MediaQuery.of(context).size.height * 0.15,
-                width: MediaQuery.of(context).size.width * 0.8,
+                height: screenheight(context) * 0.15,
+                width: screenwidth(context) * 0.8,
                 child: Row(children: [
                   SizedBox(
                       width: MediaQuery.of(context).size.width * 0.8,
@@ -86,8 +82,8 @@ class _AppHomeState extends State<AppHome> {
                 ]),
               ),
               SizedBox(
-                  height: MediaQuery.of(context).size.height * 0.1,
-                  width: MediaQuery.of(context).size.width * 0.8,
+                  height: screenheight(context) * 0.1,
+                  width: screenwidth(context) * 0.8,
                   child: Row(children: [
                     SizedBox(
                         height: 80,
@@ -105,11 +101,11 @@ class _AppHomeState extends State<AppHome> {
                         )),
                   ])),
               SizedBox(
-                  height: MediaQuery.of(context).size.height * 0.05,
+                  height: screenheight(context) * 0.05,
                   child: Padding(
                       padding: EdgeInsets.only(
-                          left: MediaQuery.of(context).size.width * 0.3,
-                          right: MediaQuery.of(context).size.width * 0.3),
+                          left: screenwidth(context) * 0.3,
+                          right: screenwidth(context) * 0.3),
                       child: FilledButton(
                           onPressed: doSomething,
                           child: const Text(
@@ -117,12 +113,23 @@ class _AppHomeState extends State<AppHome> {
                             style: TextStyle(fontSize: 16),
                           )))),
               // SizedBox(
-              // height: MediaQuery.of(context).size.height * 0.5,
+              // height: screenheight(context) * 0.5,
               // ),
+              SizedBox(
+                  height: screenheight(context) * 0.05,
+                  child: const Padding(
+                      padding: EdgeInsets.only(top: 10),
+                      child: Text(
+                        "Let's End Hunger Together, One Donation at a Time!",
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 12),
+                      ))),
             ],
           ),
         ],
       ),
     );
   }
+
+  titleLabel(BuildContext context) {}
 }
