@@ -68,25 +68,25 @@ class _AppHomeUiStateState extends State<AppHomeUiState> {
       "title": "Loading...",
       "phone": "Loading...",
       "pickloc": "Loading...",
-      "image": "processing.png"
+      "image": "processing1.png"
     },
     {
       "title": "Loading...",
       "phone": "Loading...",
       "pickloc": "Loading...",
-      "image": "processing.png"
+      "image": "processing1.png"
     },
     {
       "title": "Loading...",
       "phone": "Loading...",
       "pickloc": "Loading...",
-      "image": "processing.png"
+      "image": "processing1.png"
     },
     {
       "title": "Loading...",
       "phone": "Loading...",
       "pickloc": "Loading...",
-      "image": "processing.png"
+      "image": "processing1.png"
     },
   ];
   @override

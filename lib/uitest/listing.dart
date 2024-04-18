@@ -60,31 +60,31 @@ class _ProfileStatefulState extends State<ProfileStateful> {
   // Dummy data for demonstration
   List<Map<String, dynamic>> itemList = [
     {
-      "image": "processing.png",
+      "image": "processing1.png",
       'title': 'Loading...',
       'description': 'Loading...',
       'location': 'Loading...',
     },
     {
-      "image": "processing.png",
+      "image": "processing1.png",
       'title': 'Loading...',
       'description': 'Loading...',
       'location': 'Loading...',
     },
     {
-      "image": "processing.png",
+      "image": "processing1.png",
       'title': 'Loading...',
       'description': 'Loading...',
       'location': 'Loading...',
     },
     {
-      "image": "processing.png",
+      "image": "processing1.png",
       'title': 'Loading...',
       'description': 'Loading...',
       'location': 'Loading...',
     },
     {
-      "image": "processing.png",
+      "image": "processing1.png",
       'title': 'Loading...',
       'description': 'Loading...',
       'location': 'Loading...',
