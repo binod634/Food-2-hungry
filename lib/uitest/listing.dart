@@ -60,36 +60,35 @@ class _ProfileStatefulState extends State<ProfileStateful> {
   // Dummy data for demonstration
   List<Map<String, dynamic>> itemList = [
     {
-      'image': 'image.jpeg',
-      'title': 'Item 1',
-      'description': 'Description for item 1',
-      'location': '10:00 AM',
+      "image": "processing.png",
+      'title': 'Loading...',
+      'description': 'Loading...',
+      'location': 'Loading...',
     },
     {
-      'image': 'image.jpeg',
-      'title': 'Item 2',
-      'description': 'Description for item 2',
-      'location': '11:30 AM',
+      "image": "processing.png",
+      'title': 'Loading...',
+      'description': 'Loading...',
+      'location': 'Loading...',
     },
     {
-      'image': 'image.jpeg',
-      'title': 'Item 2',
-      'description': 'Description for item 2',
-      'location': '11:30 AM',
+      "image": "processing.png",
+      'title': 'Loading...',
+      'description': 'Loading...',
+      'location': 'Loading...',
     },
     {
-      'image': 'image.jpeg',
-      'title': 'Item 2',
-      'description': 'Description for item 2',
-      'location': '11:30 AM',
+      "image": "processing.png",
+      'title': 'Loading...',
+      'description': 'Loading...',
+      'location': 'Loading...',
     },
     {
-      'image': 'image.jpeg',
-      'title': 'Item 2',
-      'description': 'Description for item 2',
-      'location': '11:30 AM',
+      "image": "processing.png",
+      'title': 'Loading...',
+      'description': 'Loading...',
+      'location': 'Loading...',
     },
-    // Add more items as needed
   ];
 
   @override

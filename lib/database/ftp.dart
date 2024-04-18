@@ -2,7 +2,6 @@ import 'dart:io';
 
 import 'package:food_2_hunger/database/database.dart';
 import 'package:ftpconnect/ftpconnect.dart';
-import 'package:image_picker/image_picker.dart';
 
 FTPConnect ftpAuth = FTPConnect(ip, user: 'anonymous', pass: 'anonymous');
 

@@ -39,12 +39,12 @@ flutter:
   - assets/firstaidorg.png
   - assets/educationorg.png
   - assets/foodorg.png
-
   - assets/card.png
   - assets/cloth.png
   - assets/plot.png
   - assets/plot1.png
   - assets/purse.png
+  - assets/processing.png
 
 
   fonts:

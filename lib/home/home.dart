@@ -45,15 +45,15 @@ class _AppHomeUiStateState extends State<AppHomeUiState> {
   void getDonationList() async {
     var conn = await MySqlConnection.connect(databaseSettings);
     var result = await conn
-        .query("SELECT title, phone, location,image FROM `donationdata`");
+        .query("SELECT title, phone, location, image FROM `donationdata`");
 
     List<Map<String, dynamic>> parsedDonations = [];
 
     for (var row in result) {
       parsedDonations.add({
         "title": row['title'],
-        "phone": "\$${row['phone']}",
-        "pickloc": row['location'].toString(),
+        "phone": row['phone'],
+        "pickloc": row['location'],
         "image": row['image'],
       });
     }
@@ -65,58 +65,28 @@ class _AppHomeUiStateState extends State<AppHomeUiState> {
 
   List<Map<String, dynamic>> latestDonations = [
     {
-      "title": "Helping Hands Organization",
-      "phone": "98000",
-      "pickloc": "April 1, 2024",
-      "image": "image.jpeg"
+      "title": "Loading...",
+      "phone": "Loading...",
+      "pickloc": "Loading...",
+      "image": "processing.png"
     },
     {
-      "title": "Food for All Charity",
-      "phone": "98000",
-      "pickloc": "March 28, 2024",
-      "image": "image.jpeg"
+      "title": "Loading...",
+      "phone": "Loading...",
+      "pickloc": "Loading...",
+      "image": "processing.png"
     },
     {
-      "title": "Education Empowerment Fund",
-      "phone": "98000",
-      "pickloc": "March 25, 2024",
-      "image": "image.jpeg"
+      "title": "Loading...",
+      "phone": "Loading...",
+      "pickloc": "Loading...",
+      "image": "processing.png"
     },
     {
-      "title": "MediCare Relief Initiative",
-      "phone": "98000",
-      "pickloc": "March 20, 2024",
-      "image": "image.jpeg"
-    },
-    {
-      "title": "Clothing Drive Foundation",
-      "phone": "98000",
-      "pickloc": "March 15, 2024",
-      "image": "image.jpeg"
-    },
-    {
-      "title": "Clothing Drive Foundation",
-      "phone": "98000",
-      "pickloc": "March 15, 2024",
-      "image": "image.jpeg"
-    },
-    {
-      "title": "Random Food Foundation",
-      "phone": "98000",
-      "pickloc": "March 11, 2023",
-      "image": "image.jpeg"
-    },
-    {
-      "title": "Clothing Drive Foundation",
-      "phone": "98000",
-      "pickloc": "March 15, 2024",
-      "image": "image.jpeg"
-    },
-    {
-      "title": "Clothing Drive Foundation",
-      "phone": "98000",
-      "pickloc": "March 15, 2024",
-      "image": "image.jpeg"
+      "title": "Loading...",
+      "phone": "Loading...",
+      "pickloc": "Loading...",
+      "image": "processing.png"
     },
   ];
   @override
@@ -339,21 +309,25 @@ class DonationItem extends StatelessWidget {
                 children: [
                   Text(
                     donation["title"],
+                    maxLines: 1,
                     style: const TextStyle(
                       color: Colors.white,
-                      fontSize: 18,
+                      fontSize: 20,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                   const SizedBox(height: 5),
                   Text(
+                    maxLines: 1,
                     "Contact: ${donation["phone"]}",
                     style: const TextStyle(
                       color: Colors.white,
-                      fontSize: 14,
+                      fontSize: 18,
                     ),
                   ),
+                  const SizedBox(height: 5),
                   Text(
+                    maxLines: 1,
                     "Location: ${donation["pickloc"]}",
                     style: const TextStyle(
                       color: Colors.white,
