@@ -1,5 +1,4 @@
 import 'dart:io';
-import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:food_2_hunger/algorithm/navigate.dart';
@@ -13,9 +12,6 @@ import 'package:food_2_hunger/elements/bottomnavigation.dart';
 import 'package:food_2_hunger/elements/label.dart';
 import 'package:food_2_hunger/themeData/theme.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:mysql1/mysql1.dart';
-import 'package:flutter_image_compress/flutter_image_compress.dart';
-import 'package:flutter_native_image/flutter_native_image.dart';
 
 class FoodDonation extends StatelessWidget {
   const FoodDonation({super.key});
@@ -35,7 +31,7 @@ class ProfileStateful extends StatefulWidget {
 
 class _ProfileStatefulState extends State<ProfileStateful> {
   final ImagePicker picker = ImagePicker();
-  XFile? images;
+  XFile? image;
   Position? locationData;
   String? locationErrorMsg;
   String? title;
@@ -48,63 +44,46 @@ class _ProfileStatefulState extends State<ProfileStateful> {
   void doSomethings() {}
   void pickImages() async {
     final ImagePicker picker = ImagePicker();
-    final XFile? image = await picker.pickImage(source: ImageSource.gallery);
+    final XFile? tmpimage = await picker.pickImage(source: ImageSource.gallery);
     setState(() {
       if (image != null) {
-        images = image;
+        image = tmpimage;
       }
     });
   }
 
   void removeImageFromList() {
     setState(() {
-      images = null;
+      image = null;
     });
   }
 
   bool checkNull(value) {
-    if (value == null) {
-      return true;
-    }
-    return false;
+    return value == null;
   }
 
-  void valudateForm() {
-    if (images != null) return;
-    if (checkNull(title)) return;
-    if (checkNull(pickupLocation)) return;
-    if (checkNull(description)) return;
-    if (checkNull(phoneNumber)) return;
-    uploadToDatabase();
+  void valudateForm(BuildContext context) {
+    if (image != null &&
+        checkNull(title) &&
+        checkNull(pickupLocation) &&
+        checkNull(description) &&
+        checkNull(phoneNumber)) return;
+    uploadToDatabase(context);
   }
 
-  Future<File> compressFile(String file) async {
-    File compressedFile = await FlutterNativeImage.compressImage(
-      file,
-      quality: 5,
-    );
-    return compressedFile;
-  }
-
-  void uploadToDatabase() async {
+  void uploadToDatabase(BuildContext context) async {
     setState(() {
       completedDonation = false;
     });
-    var conn = await MySqlConnection.connect(databaseSettings);
-    // String locationString = locationData != null
-    //     ? "${locationData!.latitude},${locationData!.longitude}"
-    //     : ""; // Convert position to string format
 
-    String imageName = "${Random().nextInt(1000)}.png";
-    await conn.query(
-        'INSERT INTO donationdata (title, description, location, phone, image) VALUES (?, ?, ?, ?, ?)',
-        [title, description, pickupLocation, phoneNumber, imageName]);
-    File loweredImage = await compressFile(images!.path);
-    fileUpload(loweredImage, imageName);
-    navigatorNavigateTo(context, navigationChild: const AppHomeUi());
+    // check and connect to database instance if there isn't any.
+    var conn = await connectDatabase();
+    saveFile(File(image!.path));
+    insertData(image!.path, title!, description, pickupLocation);
     setState(() {
       completedDonation = true;
     });
+    navigatorNavigateTo(context, navigationChild: const AppHomeUi());
   }
 
   void _determinePosition() async {
@@ -179,7 +158,7 @@ class _ProfileStatefulState extends State<ProfileStateful> {
                       child: Column(
                         children: [
                           Column(children: [
-                            images == null
+                            image == null
                                 ? GestureDetector(
                                     onTap: pickImages,
                                     child: Container(
@@ -206,7 +185,7 @@ class _ProfileStatefulState extends State<ProfileStateful> {
                                           child: Padding(
                                             padding: const EdgeInsets.all(10),
                                             child: Image.file(
-                                              File(images!.path),
+                                              File(image!.path),
                                               fit: BoxFit.cover,
                                             ),
                                           ),
@@ -299,7 +278,9 @@ class _ProfileStatefulState extends State<ProfileStateful> {
                                   height: 20,
                                 ),
                                 FilledButton(
-                                    onPressed: uploadToDatabase,
+                                    onPressed: () {
+                                      uploadToDatabase(context);
+                                    },
                                     child: const Text("Add Listing"))
                               ],
                             ),

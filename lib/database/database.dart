@@ -1,12 +1,28 @@
-import 'package:mysql1/mysql1.dart';
+import 'package:food_2_hunger/database/order.dart';
+import 'package:sqflite/sqflite.dart';
 
-String ip = '10.42.0.1';
-var databaseSettings = ConnectionSettings(
-    host: ip, port: 3306, user: 'mysql', password: 'mysql', db: 'fooddb');
+const databaseName = "hunger.db";
+const dataTable = "orders";
+Database? databaseInstance;
 
-void connectDatabase() async {
-  var conn = await MySqlConnection.connect(databaseSettings);
-  var userId = 1;
-  var results =
-      await conn.query('select name, email from users where id = ?', [userId]);
+Future<Database> connectDatabase() async {
+  return databaseInstance ??= await openDatabase(databaseName);
+}
+
+void closeDatabase(Database? db) async {
+  await db?.close();
+}
+
+void insertData(
+    String? imageurl, String title, String? description, String? location) {
+  databaseInstance!.insert(dataTable, {
+    OrderData.imageUrl.name: imageurl,
+    OrderData.title.name: title,
+    OrderData.description.name: description,
+    OrderData.location.name: location
+  });
+}
+
+Future<List<Map<String, Object?>>> getOrderData() {
+  return databaseInstance!.query(dataTable);
 }

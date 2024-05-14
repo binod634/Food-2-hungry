@@ -3,7 +3,7 @@ import 'package:food_2_hunger/Login/login.dart';
 import 'package:food_2_hunger/algorithm/screensize.dart';
 import 'package:food_2_hunger/algorithm/shader.dart';
 import 'package:food_2_hunger/database/database.dart';
-import 'package:food_2_hunger/database/http.dart';
+import 'package:food_2_hunger/database/order.dart';
 import 'package:food_2_hunger/elements/bottomnavigation.dart';
 import 'package:food_2_hunger/elements/label.dart';
 import 'package:food_2_hunger/design/cardcontainer.dart';
@@ -39,27 +39,15 @@ class _AppHomeUiStateState extends State<AppHomeUiState> {
   @override
   void initState() {
     super.initState();
+    connectDatabase();
     getDonationList();
   }
 
   void getDonationList() async {
-    var conn = await MySqlConnection.connect(databaseSettings);
-    var result = await conn
-        .query("SELECT title, phone, location, image FROM `donationdata`");
-
-    List<Map<String, dynamic>> parsedDonations = [];
-
-    for (var row in result) {
-      parsedDonations.add({
-        "title": row['title'],
-        "phone": row['phone'],
-        "pickloc": row['location'],
-        "image": row['image'],
-      });
-    }
+    List<Map<String, Object?>> tmpDonation = await getOrderData();
 
     setState(() {
-      latestDonations = parsedDonations;
+      latestDonations = tmpDonation;
     });
   }
 
@@ -294,8 +282,8 @@ class DonationItem extends StatelessWidget {
               height: 100,
               width: 100,
               child: ClipOval(
-                child: Image.network(
-                  "$httpServer${donation["image"]}",
+                child: Image.file(
+                  donation[OrderData.imageUrl.name],
                   fit: BoxFit
                       .fill, // You can adjust the BoxFit property as needed
                 ),

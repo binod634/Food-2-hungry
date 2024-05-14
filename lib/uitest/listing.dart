@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:food_2_hunger/algorithm/screensize.dart';
 import 'package:food_2_hunger/database/database.dart';
-import 'package:food_2_hunger/database/http.dart';
+import 'package:food_2_hunger/database/order.dart';
 import 'package:food_2_hunger/design/profilecontainer.dart';
 import 'package:food_2_hunger/elements/bottomnavigation.dart';
 import 'package:food_2_hunger/elements/label.dart';
 import 'package:food_2_hunger/themeData/theme.dart';
-import 'package:mysql1/mysql1.dart';
 
 class ListingDonation extends StatelessWidget {
   const ListingDonation({super.key});
@@ -37,21 +36,8 @@ class _ProfileStatefulState extends State<ProfileStateful> {
   }
 
   void getDonationList() async {
-    var conn = await MySqlConnection.connect(databaseSettings);
-    var result = await conn
-        .query("SELECT image,title,description,location FROM `donationdata`");
-
-    List<Map<String, dynamic>> parsedDonations = [];
-
-    for (var row in result) {
-      parsedDonations.add({
-        "image": row['image'],
-        "title": row['title'],
-        "description": row['description'],
-        "location": row['location'].toString(),
-      });
-    }
-
+    connectDatabase();
+    List<Map<String, dynamic>> parsedDonations = await getOrderData();
     setState(() {
       itemList = parsedDonations;
     });
@@ -141,8 +127,9 @@ class _ProfileStatefulState extends State<ProfileStateful> {
                                   children: [
                                     Center(
                                       child: ClipOval(
-                                        child: Image.network(
-                                          "$httpServer${itemList[index]["image"]}",
+                                        child: Image.file(
+                                          itemList[index]
+                                              [OrderData.imageUrl.name],
                                           width:
                                               100, // Specify width of the circular image
                                           height: 100,
