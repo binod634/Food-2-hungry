@@ -37,7 +37,7 @@ class _EditProfileStatefulState extends State<EditProfileStateful> {
             children: [
               ProfileContainer(
                 height: 0.65,
-                topColor: Theme.of(context).colorScheme.background,
+                topColor: Theme.of(context).colorScheme.surface,
                 bottomColor: Colors.white,
               ),
               Column(

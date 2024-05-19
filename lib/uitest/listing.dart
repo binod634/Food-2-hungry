@@ -44,38 +44,7 @@ class _ProfileStatefulState extends State<ProfileStateful> {
   }
 
   // Dummy data for demonstration
-  List<Map<String, dynamic>> itemList = [
-    {
-      "image": "processing1.png",
-      'title': 'Loading...',
-      'description': 'Loading...',
-      'location': 'Loading...',
-    },
-    {
-      "image": "processing1.png",
-      'title': 'Loading...',
-      'description': 'Loading...',
-      'location': 'Loading...',
-    },
-    {
-      "image": "processing1.png",
-      'title': 'Loading...',
-      'description': 'Loading...',
-      'location': 'Loading...',
-    },
-    {
-      "image": "processing1.png",
-      'title': 'Loading...',
-      'description': 'Loading...',
-      'location': 'Loading...',
-    },
-    {
-      "image": "processing1.png",
-      'title': 'Loading...',
-      'description': 'Loading...',
-      'location': 'Loading...',
-    },
-  ];
+  List<Map<String, dynamic>> itemList = [];
 
   @override
   Widget build(BuildContext context) {
@@ -147,7 +116,8 @@ class _ProfileStatefulState extends State<ProfileStateful> {
                                             CrossAxisAlignment.start,
                                         children: [
                                           Text(
-                                            itemList[index]["title"],
+                                            itemList[index]
+                                                [OrderData.title.name],
                                             style: const TextStyle(
                                               fontWeight: FontWeight.bold,
                                               fontSize: 18,
@@ -158,7 +128,8 @@ class _ProfileStatefulState extends State<ProfileStateful> {
                                               height:
                                                   8), // Add some space between title and description
                                           Text(
-                                            itemList[index]["description"],
+                                            itemList[index]
+                                                [OrderData.description.name],
                                             style: const TextStyle(
                                               fontWeight: FontWeight.normal,
                                               fontSize: 16,
@@ -169,7 +140,7 @@ class _ProfileStatefulState extends State<ProfileStateful> {
                                               height:
                                                   4), // Add some space between description and other subtitles
                                           Text(
-                                            'location: ${itemList[index]["location"]}',
+                                            'location: ${itemList[index][OrderData.location.name]}',
                                             style: const TextStyle(
                                               fontWeight: FontWeight.normal,
                                               fontSize: 14,

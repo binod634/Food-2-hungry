@@ -103,7 +103,7 @@ class _ProfileStatefulState extends State<ProfileStateful> {
                                         },
                                         style: const ButtonStyle(
                                             backgroundColor:
-                                                MaterialStatePropertyAll(
+                                                WidgetStatePropertyAll(
                                                     Color.fromARGB(
                                                         255, 195, 206, 216))),
                                         child: const Text("Edit Profile"),

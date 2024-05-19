@@ -9,7 +9,6 @@ import 'package:food_2_hunger/elements/label.dart';
 import 'package:food_2_hunger/design/cardcontainer.dart';
 import 'package:food_2_hunger/themeData/theme.dart';
 import 'package:food_2_hunger/uitest/adddonation.dart';
-import 'package:mysql1/mysql1.dart';
 
 import '../algorithm/navigate.dart';
 
@@ -51,32 +50,7 @@ class _AppHomeUiStateState extends State<AppHomeUiState> {
     });
   }
 
-  List<Map<String, dynamic>> latestDonations = [
-    {
-      "title": "Loading...",
-      "phone": "Loading...",
-      "pickloc": "Loading...",
-      "image": "processing1.png"
-    },
-    {
-      "title": "Loading...",
-      "phone": "Loading...",
-      "pickloc": "Loading...",
-      "image": "processing1.png"
-    },
-    {
-      "title": "Loading...",
-      "phone": "Loading...",
-      "pickloc": "Loading...",
-      "image": "processing1.png"
-    },
-    {
-      "title": "Loading...",
-      "phone": "Loading...",
-      "pickloc": "Loading...",
-      "image": "processing1.png"
-    },
-  ];
+  List<Map<String, dynamic>> latestDonations = [];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -189,7 +163,8 @@ class _AppHomeUiStateState extends State<AppHomeUiState> {
                     width: screenwidth(context) * 0.9,
                     child: Text(
                       "Donate",
-                      style: returnHeaderTextStyle(context),
+                      style: returnHeaderTextStyle(
+                          Theme.of(context).colorScheme.surface),
                     ),
                   ),
                   SizedBox(height: screenheight(context) * 0.02),
@@ -229,20 +204,21 @@ class _AppHomeUiStateState extends State<AppHomeUiState> {
                     width: screenwidth(context) * 0.9,
                     child: Text(
                       "Latest Donation",
-                      style: returnHeaderTextStyle(context),
+                      style: returnHeaderTextStyle(
+                          Theme.of(context).colorScheme.surface),
                     ),
                   ),
                   SizedBox(
                     height: screenheight(context) * 0.02,
                   ),
                   SizedBox(
-                      height: screenheight(context) * 0.6,
-                      child: ListView(children: [
-                        for (int i = 0; i < latestDonations.length; i++)
-                          DonationItem(
-                            donation: latestDonations[i],
-                          )
-                      ])),
+                    height: screenheight(context) * 0.6,
+                    child: ListView.builder(
+                        physics: const NeverScrollableScrollPhysics(),
+                        itemCount: latestDonations.length,
+                        itemBuilder: (BuildContext context, int index) =>
+                            DonationItem(donation: latestDonations[index])),
+                  ),
                 ],
               )),
         ),
@@ -250,13 +226,13 @@ class _AppHomeUiStateState extends State<AppHomeUiState> {
   }
 }
 
-TextStyle returnHeaderTextStyle(BuildContext context) {
+TextStyle returnHeaderTextStyle(Color color) {
   return TextStyle(
       fontFamily: "joti",
       fontWeight: FontWeight.bold,
       fontSize: 28,
       shadows: [universalShadow()],
-      color: Theme.of(context).colorScheme.surface);
+      color: color);
 }
 
 class DonationItem extends StatelessWidget {
@@ -282,10 +258,12 @@ class DonationItem extends StatelessWidget {
               height: 100,
               width: 100,
               child: ClipOval(
-                child: Image.file(
-                  donation[OrderData.imageUrl.name],
-                  fit: BoxFit
-                      .fill, // You can adjust the BoxFit property as needed
+                // child: Image.file(
+                // File(donation[OrderData.title.name] ?? "null"),
+                // fit: BoxFit
+                // .fill, // You can adjust the BoxFit property as needed
+                child: Text(
+                  donation[OrderData.title.name],
                 ),
               ),
             ),
@@ -296,7 +274,7 @@ class DonationItem extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    donation["title"],
+                    donation[OrderData.title.name],
                     maxLines: 1,
                     style: const TextStyle(
                       color: Colors.white,
@@ -307,7 +285,7 @@ class DonationItem extends StatelessWidget {
                   const SizedBox(height: 5),
                   Text(
                     maxLines: 1,
-                    "Contact: ${donation["phone"]}",
+                    "Contact: ${donation[OrderData.phoneNo.name]}",
                     style: const TextStyle(
                       color: Colors.white,
                       fontSize: 18,
@@ -316,7 +294,7 @@ class DonationItem extends StatelessWidget {
                   const SizedBox(height: 5),
                   Text(
                     maxLines: 1,
-                    "Location: ${donation["pickloc"]}",
+                    "Location: ${donation[OrderData.location.name]}",
                     style: const TextStyle(
                       color: Colors.white,
                       fontSize: 14,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:food_2_hunger/algorithm/navigate.dart';
 import 'package:food_2_hunger/design/containercircle.dart';
 import 'package:food_2_hunger/algorithm/screensize.dart';
 import 'package:food_2_hunger/elements/label.dart';
@@ -28,17 +29,11 @@ class AppLoginState extends StatefulWidget {
 class _AppLoginState extends State<AppLoginState> {
   String initialText = "Login";
   void doSomething() {}
-  void checkLogin() async {
-    await Future.delayed(const Duration(seconds: 2));
+  bool checkLogin() {
     if (mailString == "binod" && pwdString == "binod") {
-      Navigator.of(context)
-          .push(MaterialPageRoute(builder: (context) => const AppHomeUi()));
-    } else {
-      await Future.delayed(const Duration(seconds: 2));
-      setState(() {
-        initialText = "Incorrect.";
-      });
+      return true;
     }
+    return false;
   }
 
   var mailController = TextEditingController();
@@ -50,7 +45,6 @@ class _AppLoginState extends State<AppLoginState> {
   Widget build(BuildContext context) {
     return Scaffold(
         resizeToAvoidBottomInset: false,
-        // backgroundColor: const Color.fromARGB(255, 107, 230, 236),
         body: SingleChildScrollView(
           reverse: true,
           padding:
@@ -61,10 +55,6 @@ class _AppLoginState extends State<AppLoginState> {
                 height: 0.45,
               ),
               Column(
-                // crossAxisAlignment: CrossAxisAlignment.start,
-                // shrinkWrap: true,
-                // padding: EdgeInsets.only(
-                // top: MediaQuery.of(context).size.width * 0.5),
                 children: [
                   SizedBox(
                     height: screenheight(context) * 0.1,
@@ -154,14 +144,16 @@ class _AppLoginState extends State<AppLoginState> {
                               left: screenwidth(context) * 0.3,
                               right: screenwidth(context) * 0.3),
                           child: FilledButton(
-                              onPressed: checkLogin,
+                              onPressed: () {
+                                if (checkLogin()) {
+                                  navigatorNavigateTo(context,
+                                      navigationChild: const AppHomeUi());
+                                }
+                              },
                               child: const Text(
                                 "Login",
                                 style: TextStyle(fontSize: 16),
                               )))),
-                  // SizedBox(
-                  // height: screenheight(context) * 0.5,
-                  // ),
                   SizedBox(
                       height: screenheight(context) * 0.05,
                       child: const Padding(

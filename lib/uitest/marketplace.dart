@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:food_2_hunger/database/order.dart';
 import 'package:food_2_hunger/elements/bottomnavigation.dart';
 import 'package:food_2_hunger/themeData/theme.dart';
 
@@ -9,30 +10,70 @@ class MarketPlace extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: lightColorScheme,
-      home: const uiTestStatefulState(),
+      home: const UiTestStatefulState(),
     );
   }
 }
 
-class uiTestStatefulState extends StatefulWidget {
-  const uiTestStatefulState({super.key});
+class UiTestStatefulState extends StatefulWidget {
+  const UiTestStatefulState({super.key});
 
   @override
-  createState() => _uiTestStateful();
+  createState() => _UiTestStateful();
 }
 
-class _uiTestStateful extends State<uiTestStatefulState> {
+class _UiTestStateful extends State<UiTestStatefulState> {
   final List<Map<String, String>> specialOffers = [
-    {'name': 'Hand Plot', 'price': 'Rs. 100', 'image': "assets/cloth.png"},
-    {'name': 'Exotic Fruits', 'price': 'Rs. 150', 'image': "assets/plot.png"},
-    {'name': 'Organic Honey', 'price': 'Rs. 250', 'image': "assets/card.png"},
-    {'name': 'Organic Honey', 'price': 'Rs. 250', 'image': "assets/purse.png"},
-    {'name': 'Organic Honey', 'price': 'Rs. 250', 'image': "assets/plot1.png"},
-    {'name': 'Organic Honey', 'price': 'Rs. 250', 'image': "assets/plot.png"},
-    {'name': 'Organic Honey', 'price': 'Rs. 250', 'image': "assets/cloth.png"},
-    {'name': 'Organic Honey', 'price': 'Rs. 250', 'image': "assets/plot.png"},
-    {'name': 'Organic Honey', 'price': 'Rs. 250', 'image': "assets/purse.png"},
-    {'name': 'Organic Honey', 'price': 'Rs. 250', 'image': "assets/card.png"},
+    {
+      OrderData.title.name: 'Hand Plot',
+      OrderData.location.name: 'Rs. 100',
+      OrderData.imageUrl.name: "assets/cloth.png"
+    },
+    {
+      OrderData.title.name: 'Exotic Fruits',
+      OrderData.location.name: 'Rs. 150',
+      OrderData.imageUrl.name: "assets/plot.png"
+    },
+    {
+      OrderData.title.name: 'Organic Honey',
+      OrderData.location.name: 'Rs. 250',
+      OrderData.imageUrl.name: "assets/card.png"
+    },
+    {
+      OrderData.title.name: 'Organic Honey',
+      OrderData.location.name: 'Rs. 250',
+      OrderData.imageUrl.name: "assets/purse.png"
+    },
+    {
+      OrderData.title.name: 'Organic Honey',
+      OrderData.location.name: 'Rs. 250',
+      OrderData.imageUrl.name: "assets/plot1.png"
+    },
+    {
+      OrderData.title.name: 'Organic Honey',
+      OrderData.location.name: 'Rs. 250',
+      OrderData.imageUrl.name: "assets/plot.png"
+    },
+    {
+      OrderData.title.name: 'Organic Honey',
+      OrderData.location.name: 'Rs. 250',
+      OrderData.imageUrl.name: "assets/cloth.png"
+    },
+    {
+      OrderData.title.name: 'Organic Honey',
+      OrderData.location.name: 'Rs. 250',
+      OrderData.imageUrl.name: "assets/plot.png"
+    },
+    {
+      OrderData.title.name: 'Organic Honey',
+      OrderData.location.name: 'Rs. 250',
+      OrderData.imageUrl.name: "assets/purse.png"
+    },
+    {
+      OrderData.title.name: 'Organic Honey',
+      OrderData.location.name: 'Rs. 250',
+      OrderData.imageUrl.name: "assets/card.png"
+    },
   ];
 
   @override
@@ -94,21 +135,21 @@ Widget _buildSpecialOfferItem(Map<String, String> item) {
                     borderRadius: BorderRadius.circular(
                         10), // Adjust the radius as needed
                     child: Image.asset(
-                      item['image']!,
+                      item[OrderData.imageUrl.name]!,
                       fit: BoxFit
                           .cover, // Use cover to fill the curved container
                     ),
                   ),
                 ),
                 Text(
-                  item['name']!,
+                  item[OrderData.title.name]!,
                   style: const TextStyle(
                     fontSize: 12.0,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
                 Text(
-                  item['price']!,
+                  item[OrderData.location.name]!,
                   style: const TextStyle(
                     fontSize: 10.0,
                   ),

@@ -12,6 +12,7 @@ import 'package:food_2_hunger/elements/bottomnavigation.dart';
 import 'package:food_2_hunger/elements/label.dart';
 import 'package:food_2_hunger/themeData/theme.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 class FoodDonation extends StatelessWidget {
   const FoodDonation({super.key});
@@ -43,6 +44,7 @@ class _ProfileStatefulState extends State<ProfileStateful> {
 
   void doSomethings() {}
   void pickImages() async {
+    await Permission.storage.request();
     final ImagePicker picker = ImagePicker();
     final XFile? tmpimage = await picker.pickImage(source: ImageSource.gallery);
     setState(() {
@@ -77,9 +79,8 @@ class _ProfileStatefulState extends State<ProfileStateful> {
     });
 
     // check and connect to database instance if there isn't any.
-    var conn = await connectDatabase();
-    saveFile(File(image!.path));
-    insertData(image!.path, title!, description, pickupLocation);
+    var lnk = await saveFile(File(image!.path));
+    insertData(lnk, title!, description, pickupLocation);
     setState(() {
       completedDonation = true;
     });

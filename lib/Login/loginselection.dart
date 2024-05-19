@@ -90,7 +90,7 @@ class _LoginSelectionScreenState extends State<LoginSelectionScreen> {
                         child: FilledButton(
                           style: const ButtonStyle(
                               backgroundColor:
-                                  MaterialStatePropertyAll(Colors.red)),
+                                  WidgetStatePropertyAll(Colors.red)),
                           onPressed: doSomething,
                           child: const Text("Sign Up"),
                         )),
