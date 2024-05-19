@@ -1,9 +1,8 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:food_2_hunger/algorithm/navigate.dart';
 import 'package:food_2_hunger/database/database.dart';
-import 'package:food_2_hunger/database/ftp.dart';
+import 'package:food_2_hunger/database/savefile.dart';
 import 'package:food_2_hunger/home/home.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:food_2_hunger/algorithm/screensize.dart';
@@ -48,7 +47,7 @@ class _ProfileStatefulState extends State<ProfileStateful> {
     final ImagePicker picker = ImagePicker();
     final XFile? tmpimage = await picker.pickImage(source: ImageSource.gallery);
     setState(() {
-      if (image != null) {
+      if (tmpimage != null) {
         image = tmpimage;
       }
     });
@@ -60,17 +59,16 @@ class _ProfileStatefulState extends State<ProfileStateful> {
     });
   }
 
-  bool checkNull(value) {
-    return value == null;
+  bool isValid(value) {
+    return value != null;
   }
 
   void valudateForm(BuildContext context) {
     if (image != null &&
-        checkNull(title) &&
-        checkNull(pickupLocation) &&
-        checkNull(description) &&
-        checkNull(phoneNumber)) return;
-    uploadToDatabase(context);
+        isValid(title) &&
+        isValid(pickupLocation) &&
+        isValid(description) &&
+        isValid(phoneNumber)) uploadToDatabase(context);
   }
 
   void uploadToDatabase(BuildContext context) async {
@@ -80,11 +78,13 @@ class _ProfileStatefulState extends State<ProfileStateful> {
 
     // check and connect to database instance if there isn't any.
     var lnk = await saveFile(File(image!.path));
-    insertData(lnk, title!, description, pickupLocation);
+    insertData(
+        lnk, title!, description, pickupLocation, phoneNumber.toString());
     setState(() {
       completedDonation = true;
     });
     navigatorNavigateTo(context, navigationChild: const AppHomeUi());
+    navigationBarItem = 0;
   }
 
   void _determinePosition() async {
@@ -280,7 +280,7 @@ class _ProfileStatefulState extends State<ProfileStateful> {
                                 ),
                                 FilledButton(
                                     onPressed: () {
-                                      uploadToDatabase(context);
+                                      valudateForm(context);
                                     },
                                     child: const Text("Add Listing"))
                               ],
@@ -306,4 +306,18 @@ class _ProfileStatefulState extends State<ProfileStateful> {
       bottomNavigationBar: const BottomNavigation(),
     );
   }
+}
+
+Widget addDonationUsage({double? height, double? weight}) {
+  return SizedBox(
+      width: weight,
+      height: height,
+      child: Container(
+        alignment: Alignment.center,
+        child: const Text(
+          "No Data found.\nTry Adding some.",
+          style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+          textAlign: TextAlign.center,
+        ),
+      ));
 }

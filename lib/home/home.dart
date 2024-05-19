@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:food_2_hunger/Login/login.dart';
 import 'package:food_2_hunger/algorithm/screensize.dart';
@@ -54,175 +56,177 @@ class _AppHomeUiStateState extends State<AppHomeUiState> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        bottomNavigationBar: const BottomNavigation(),
         resizeToAvoidBottomInset: false,
         body: Center(
           child: SizedBox(
               width: screenwidth(context) * 0.9,
-              child: ListView(
-                children: [
-                  SizedBox(
-                    height: screenheight(context) * 0,
-                  ),
-                  SizedBox(
-                    height: screenheight(context) * 0.1,
-                    child: Row(
-                      children: [
-                        Container(
-                            width: screenwidth(context) * 0.7,
-                            alignment: Alignment.centerLeft,
-                            child: titleLabel(context,
-                                ssize: 28, align: TextAlign.start)),
-                        Container(
-                            width: screenwidth(context) * 0.2,
-                            alignment: Alignment.centerRight,
-                            child: TextButton(
-                              onPressed: () =>
-                                  Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) => const AppLogin(),
-                              )),
-                              child: const CircleAvatar(
-                                child: Text(
-                                  "A",
-                                  style: TextStyle(
-                                      fontFamily: 'joti',
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                              ),
-                            )),
-                      ],
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    SizedBox(
+                      height: screenheight(context) * 0,
                     ),
-                  ),
-                  SizedBox(height: screenheight(context) * 0.02),
-                  SizedBox(
-                    height: screenheight(context) * 0.25,
-                    child: Container(
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            color: const Color(0xFF89ECF0)),
-                        child: Stack(children: [
-                          SizedBox.expand(
-                            child: SizedBox(
-                              width: screenwidth(context) * 0.45,
-                              child: Padding(
-                                  padding: EdgeInsets.only(
-                                      left: screenwidth(context) * 0.4),
-                                  child: Image.asset("assets/food1.png")),
-                            ),
-                          ),
-                          Column(
-                            children: [
-                              SizedBox(
-                                height: screenheight(context) * 0.1,
-                                width: double.infinity,
-                                child: const Padding(
-                                  padding: EdgeInsets.only(left: 12, top: 12),
+                    SizedBox(
+                      height: screenheight(context) * 0.1,
+                      child: Row(
+                        children: [
+                          Container(
+                              width: screenwidth(context) * 0.7,
+                              alignment: Alignment.centerLeft,
+                              child: titleLabel(context,
+                                  ssize: 28, align: TextAlign.start)),
+                          Container(
+                              width: screenwidth(context) * 0.2,
+                              alignment: Alignment.centerRight,
+                              child: TextButton(
+                                onPressed: () => Navigator.of(context)
+                                    .push(MaterialPageRoute(
+                                  builder: (context) => const AppLogin(),
+                                )),
+                                child: const CircleAvatar(
                                   child: Text(
-                                    "Together Let's end hunger.\nOne Donation at a time.",
+                                    "A",
                                     style: TextStyle(
-                                        fontSize: 14,
+                                        fontFamily: 'joti',
+                                        fontSize: 20,
                                         fontWeight: FontWeight.bold),
                                   ),
                                 ),
-                              ),
-                              SizedBox(
-                                height: screenheight(context) * 0.05,
-                              ),
-                              SizedBox(
-                                height: screenheight(context) * 0.05,
+                              )),
+                        ],
+                      ),
+                    ),
+                    SizedBox(height: screenheight(context) * 0.02),
+                    SizedBox(
+                      height: screenheight(context) * 0.25,
+                      child: Container(
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              color: const Color(0xFF89ECF0)),
+                          child: Stack(children: [
+                            SizedBox.expand(
+                              child: SizedBox(
+                                width: screenwidth(context) * 0.45,
                                 child: Padding(
                                     padding: EdgeInsets.only(
-                                        right: screenwidth(context) * 0.55,
-                                        left: screenwidth(context) * 0.05),
-                                    child: MaterialButton(
-                                      color: const Color(0xFF1F7074),
-                                      textColor: Colors.white,
-                                      shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(10)),
-                                      onPressed: () => navigatorNavigateTo(
-                                          context,
-                                          navigationChild:
-                                              const FoodDonation()),
-                                      child: const Text(
-                                        "Donate",
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.bold),
-                                      ),
-                                    )),
-                              )
-                            ],
-                          )
-                        ])),
-                  ),
-                  SizedBox(
-                    height: screenheight(context) * 0.02,
-                  ),
-                  SizedBox(
-                    height: screenheight(context) * 0.05,
-                    width: screenwidth(context) * 0.9,
-                    child: Text(
-                      "Donate",
-                      style: returnHeaderTextStyle(
-                          Theme.of(context).colorScheme.surface),
+                                        left: screenwidth(context) * 0.4),
+                                    child: Image.asset("assets/food1.png")),
+                              ),
+                            ),
+                            Column(
+                              children: [
+                                SizedBox(
+                                  height: screenheight(context) * 0.1,
+                                  width: double.infinity,
+                                  child: const Padding(
+                                    padding: EdgeInsets.only(left: 12, top: 12),
+                                    child: Text(
+                                      "Together Let's end hunger.\nOne Donation at a time.",
+                                      style: TextStyle(
+                                          fontSize: 14,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: screenheight(context) * 0.05,
+                                ),
+                                SizedBox(
+                                  height: screenheight(context) * 0.05,
+                                  child: Padding(
+                                      padding: EdgeInsets.only(
+                                          right: screenwidth(context) * 0.55,
+                                          left: screenwidth(context) * 0.05),
+                                      child: MaterialButton(
+                                        color: const Color(0xFF1F7074),
+                                        textColor: Colors.white,
+                                        shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(10)),
+                                        onPressed: () => navigatorNavigateTo(
+                                            context,
+                                            navigationChild:
+                                                const FoodDonation()),
+                                        child: const Text(
+                                          "Donate",
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                      )),
+                                )
+                              ],
+                            )
+                          ])),
                     ),
-                  ),
-                  SizedBox(height: screenheight(context) * 0.02),
-                  SizedBox(
-                    height: screenheight(context) * 0.1,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        returnHomeCardContainer(context,
-                            backgroundColor:
-                                Theme.of(context).colorScheme.secondary,
-                            img: "assets/foodorg.png",
-                            label: "Food"),
-                        returnHomeCardContainer(context,
-                            backgroundColor:
-                                Theme.of(context).colorScheme.secondary,
-                            img: "assets/clothesorg.png",
-                            label: "Clothes"),
-                        returnHomeCardContainer(context,
-                            backgroundColor:
-                                Theme.of(context).colorScheme.secondary,
-                            img: "assets/educationorg.png",
-                            label: "Education"),
-                        returnHomeCardContainer(context,
-                            backgroundColor:
-                                Theme.of(context).colorScheme.secondary,
-                            img: "assets/firstaidorg.png",
-                            label: "Medicine"),
-                      ],
+                    SizedBox(
+                      height: screenheight(context) * 0.02,
                     ),
-                  ),
-                  SizedBox(
-                    height: screenheight(context) * 0.02,
-                  ),
-                  SizedBox(
-                    height: screenheight(context) * 0.05,
-                    width: screenwidth(context) * 0.9,
-                    child: Text(
-                      "Latest Donation",
-                      style: returnHeaderTextStyle(
-                          Theme.of(context).colorScheme.surface),
+                    SizedBox(
+                      height: screenheight(context) * 0.05,
+                      width: screenwidth(context) * 0.9,
+                      child: Text(
+                        "Donate",
+                        style: returnHeaderTextStyle(
+                            Theme.of(context).colorScheme.surface),
+                      ),
                     ),
-                  ),
-                  SizedBox(
-                    height: screenheight(context) * 0.02,
-                  ),
-                  SizedBox(
-                    height: screenheight(context) * 0.6,
-                    child: ListView.builder(
-                        physics: const NeverScrollableScrollPhysics(),
-                        itemCount: latestDonations.length,
-                        itemBuilder: (BuildContext context, int index) =>
-                            DonationItem(donation: latestDonations[index])),
-                  ),
-                ],
+                    SizedBox(height: screenheight(context) * 0.02),
+                    SizedBox(
+                      height: screenheight(context) * 0.1,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          returnHomeCardContainer(context,
+                              backgroundColor:
+                                  Theme.of(context).colorScheme.secondary,
+                              img: "assets/foodorg.png",
+                              label: "Food"),
+                          returnHomeCardContainer(context,
+                              backgroundColor:
+                                  Theme.of(context).colorScheme.secondary,
+                              img: "assets/clothesorg.png",
+                              label: "Clothes"),
+                          returnHomeCardContainer(context,
+                              backgroundColor:
+                                  Theme.of(context).colorScheme.secondary,
+                              img: "assets/educationorg.png",
+                              label: "Education"),
+                          returnHomeCardContainer(context,
+                              backgroundColor:
+                                  Theme.of(context).colorScheme.secondary,
+                              img: "assets/firstaidorg.png",
+                              label: "Medicine"),
+                        ],
+                      ),
+                    ),
+                    SizedBox(
+                      height: screenheight(context) * 0.02,
+                    ),
+                    SizedBox(
+                      height: screenheight(context) * 0.05,
+                      width: screenwidth(context) * 0.9,
+                      child: Text(
+                        "Latest Donation",
+                        style: returnHeaderTextStyle(
+                            Theme.of(context).colorScheme.surface),
+                      ),
+                    ),
+                    SizedBox(
+                      height: screenheight(context) * 0.02,
+                    ),
+                    latestDonations.isNotEmpty
+                        ? Column(children: [
+                            for (var i = 0; i < latestDonations.length; i++)
+                              DonationItem(donation: latestDonations[i])
+                          ])
+                        : addDonationUsage(
+                            height: screenheight(context) * 0.25,
+                            weight: screenwidth(context) * 0.8),
+                  ],
+                ),
               )),
-        ),
-        bottomNavigationBar: const BottomNavigation());
+        ));
   }
 }
 
@@ -258,12 +262,12 @@ class DonationItem extends StatelessWidget {
               height: 100,
               width: 100,
               child: ClipOval(
-                // child: Image.file(
-                // File(donation[OrderData.title.name] ?? "null"),
-                // fit: BoxFit
-                // .fill, // You can adjust the BoxFit property as needed
-                child: Text(
-                  donation[OrderData.title.name],
+                child: Image.file(
+                  File(donation[OrderData.imageUrl.name] ?? "null"),
+                  fit: BoxFit
+                      .cover, // You can adjust the BoxFit property as needed
+                  // child: Text(
+                  // donation[OrderData.title.name],
                 ),
               ),
             ),
@@ -278,14 +282,14 @@ class DonationItem extends StatelessWidget {
                     maxLines: 1,
                     style: const TextStyle(
                       color: Colors.white,
-                      fontSize: 20,
+                      fontSize: 24,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                   const SizedBox(height: 5),
                   Text(
                     maxLines: 1,
-                    "Contact: ${donation[OrderData.phoneNo.name]}",
+                    "Contact no: ${donation[OrderData.phoneNo.name]}",
                     style: const TextStyle(
                       color: Colors.white,
                       fontSize: 18,
